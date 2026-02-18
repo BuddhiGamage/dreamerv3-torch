@@ -1,0 +1,433 @@
+# extract_wm_feats_fiper_rgb_only_all_exps_resize.py
+# ============================================================
+# Discovers all FIPER experiments under DATA_ROOT (expects rollouts/{calibration,test}/*.pkl)
+# For EACH experiment:
+#   - Finds a matching experiment-specific WM checkpoint under CKPT_ROOT
+#       * Robust matching: does NOT rely on md5 hash of absolute paths
+#       * Matches by task folder name (basename(exp_root)) or exp_id prefix before '__'
+#       * If multiple ckpts exist for a task, picks the newest by mtime
+#   - Loads WM (trained success-only RGB, zero actions)
+#   - Resizes RGB frames to TARGET_HW (must match training)
+#   - Extracts per-timestep RSSM features feat = dynamics.get_feat(post)
+#   - Saves per-experiment outputs:
+#       calib_success_feats.npy   (object array of [Ti, D] arrays)    [SUCCESS-ONLY]
+#       test_feats.npy            (object array of [Ti, D] arrays)
+#       test_labels.npy           (1=failure, 0=success)
+#       *_meta.json               (paths + episode ids + lengths)
+#
+# NOTE:
+#   This matches the "resize to fixed HxW" training fix to avoid encoder shape mismatch
+#   for non-square/non-standard resolutions like (240,320).
+# ============================================================
+
+import os, glob, pickle, json, argparse, hashlib
+from typing import Dict, List, Tuple, Optional
+
+import numpy as np
+import torch
+from tqdm import tqdm
+from PIL import Image
+
+# IMPORTANT: this assumes you run inside the dreamerv3-torch repo
+# or have it on PYTHONPATH so `from models import WorldModel` works.
+from models import WorldModel
+
+
+# =========================
+# Image normalization + resize (same as training)
+# =========================
+def to_hwc_uint8(x: np.ndarray) -> np.ndarray:
+    arr = np.asarray(x)
+
+    if arr.dtype in (np.float32, np.float64):
+        mx = float(np.nanmax(arr)) if arr.size else 0.0
+        if mx <= 1.0 + 1e-6:
+            arr = (arr * 255.0).round()
+        arr = np.clip(arr, 0, 255).astype(np.uint8)
+    elif arr.dtype != np.uint8:
+        arr = np.clip(arr, 0, 255).astype(np.uint8)
+
+    if arr.ndim == 2:
+        arr = arr[:, :, None]
+
+    if arr.ndim == 3:
+        # CHW -> HWC
+        if arr.shape[0] in (1, 3, 4) and arr.shape[-1] not in (1, 3, 4):
+            arr = np.transpose(arr, (1, 2, 0))
+
+    if arr.ndim != 3:
+        raise ValueError(f"RGB must be 2D/3D, got shape {arr.shape}")
+
+    H, W, C = arr.shape
+    if C not in (1, 3, 4):
+        raise ValueError(f"Unexpected channel count C={C} for shape {arr.shape}")
+
+    return np.ascontiguousarray(arr)
+
+
+def resize_hwc_uint8(img_hwc: np.ndarray, target_hw: Tuple[int, int]) -> np.ndarray:
+    th, tw = int(target_hw[0]), int(target_hw[1])
+    if img_hwc.shape[0] == th and img_hwc.shape[1] == tw:
+        return np.ascontiguousarray(img_hwc)
+
+    # PIL uses (W,H)
+    if img_hwc.shape[2] == 1:
+        pil = Image.fromarray(img_hwc[:, :, 0], mode="L")
+        pil = pil.resize((tw, th), resample=Image.BILINEAR)
+        out = np.asarray(pil, dtype=np.uint8)[:, :, None]
+        return np.ascontiguousarray(out)
+
+    pil = Image.fromarray(img_hwc)
+    pil = pil.resize((tw, th), resample=Image.BILINEAR)
+    out = np.asarray(pil, dtype=np.uint8)
+    return np.ascontiguousarray(out)
+
+
+# =========================
+# Discover experiments
+# =========================
+def discover_experiment_roots(data_root: str) -> List[str]:
+    """
+    Discover experiments by locating:
+      <exp_root>/rollouts/calibration/*.pkl
+    where exp_root is two levels up from the pkl:
+      .../<exp_root>/rollouts/calibration/file.pkl
+    """
+    pattern = os.path.join(data_root, "**", "rollouts", "calibration", "*.pkl")
+    pkls = glob.glob(pattern, recursive=True)
+    exp_roots = set()
+    for p in pkls:
+        calib_dir = os.path.dirname(p)              # .../rollouts/calibration
+        rollouts_dir = os.path.dirname(calib_dir)   # .../rollouts
+        exp_root = os.path.dirname(rollouts_dir)    # .../<exp_root>
+        exp_roots.add(exp_root)
+    return sorted(exp_roots)
+
+
+def exp_id_from_root(exp_root: str, data_root: str) -> str:
+    """
+    Old scheme: relpath + md5(exp_root). This can change across machines.
+    We keep it ONLY for naming outputs, not for ckpt lookup.
+    """
+    rel = os.path.relpath(exp_root, data_root).replace(os.sep, "__").strip("_")
+    h = hashlib.md5(exp_root.encode("utf-8")).hexdigest()[:8]
+    return f"{rel}__{h}"
+
+
+# =========================
+# Robust ckpt discovery / matching
+# =========================
+def build_ckpt_index(ckpt_root: str) -> Dict[str, List[str]]:
+    """
+    Returns mapping:
+      task_name -> [ckpt_path1, ckpt_path2, ...]
+    where task_name is the prefix before '__' in the folder name.
+
+    Example folder:
+      pretzel__5634c9fc  -> task='pretzel'
+    """
+    pattern = os.path.join(ckpt_root, "**", "wm_success_only_rgb_only.pt")
+    ckpts = sorted(glob.glob(pattern, recursive=True))
+
+    idx: Dict[str, List[str]] = {}
+    for ckpt_path in ckpts:
+        exp_folder = os.path.basename(os.path.dirname(ckpt_path))
+        task = exp_folder.split("__")[0] if "__" in exp_folder else exp_folder
+        idx.setdefault(task, []).append(ckpt_path)
+    return idx
+
+
+def pick_newest(paths: List[str]) -> str:
+    return sorted(paths, key=lambda p: os.path.getmtime(p), reverse=True)[0]
+
+
+def find_ckpt_for_exp(
+    exp_root: str,
+    exp_id: str,
+    ckpt_root: str,
+    ckpt_index: Dict[str, List[str]],
+) -> Optional[str]:
+    """
+    Strategy:
+      1) exact path: ckpt_root/exp_id/wm_success_only_rgb_only.pt
+      2) match by task = basename(exp_root)
+      3) match by task = exp_id prefix before '__'
+      4) last resort: if only one ckpt exists overall, use it (optional)
+    """
+    # 1) exact expected location (if you happened to store ckpts under same exp_id)
+    direct = os.path.join(ckpt_root, exp_id, "wm_success_only_rgb_only.pt")
+    if os.path.exists(direct):
+        return direct
+
+    # 2) match by task name from exp_root basename
+    task = os.path.basename(exp_root)
+    cands = ckpt_index.get(task, [])
+    if len(cands) == 1:
+        return cands[0]
+    if len(cands) > 1:
+        return pick_newest(cands)
+
+    # 3) fallback: match by exp_id prefix
+    task2 = exp_id.split("__")[0] if "__" in exp_id else exp_id
+    cands2 = ckpt_index.get(task2, [])
+    if len(cands2) == 1:
+        return cands2[0]
+    if len(cands2) > 1:
+        return pick_newest(cands2)
+
+    # 4) optional last resort: if there's exactly one ckpt in ckpt_root
+    all_ckpts = [p for vv in ckpt_index.values() for p in vv]
+    if len(all_ckpts) == 1:
+        return all_ckpts[0]
+
+    return None
+
+
+# =========================
+# FIPER loader (RGB only + zero actions + resize)
+# =========================
+def load_fiper_rgb_only(path: str, action_dim: int, target_hw: Tuple[int, int]):
+    with open(path, "rb") as f:
+        d = pickle.load(f)
+    meta = d["metadata"]
+    steps = d["rollout"]
+
+    frames = []
+    for s in steps:
+        im = to_hwc_uint8(s["rgb"])
+        im = resize_hwc_uint8(im, target_hw)
+        frames.append(im)
+
+    images = np.stack(frames, axis=0).astype(np.uint8)  # (T,H,W,C)
+    T = images.shape[0]
+
+    actions = np.zeros((T, action_dim), dtype=np.float32)
+    reward = np.zeros((T, 1), dtype=np.float32)
+
+    is_first = np.zeros((T,), dtype=np.float32); is_first[0] = 1.0
+    is_terminal = np.zeros((T,), dtype=np.float32); is_terminal[-1] = 1.0
+    discount = np.ones((T,), dtype=np.float32); discount[-1] = 0.0
+
+    ep = {
+        "image": images,
+        "action": actions,
+        "reward": reward,
+        "discount": discount,
+        "is_first": is_first,
+        "is_terminal": is_terminal,
+    }
+    return meta, ep
+
+
+# =========================
+# Build WM from ckpt
+# =========================
+def build_wm_from_ckpt(ckpt: dict) -> WorldModel:
+    cfgd = ckpt["config"]
+    device = cfgd.get("device", "cuda" if torch.cuda.is_available() else "cpu")
+
+    class DummySpace:
+        def __init__(self, shape): self.shape = shape
+
+    class DummyDictSpace:
+        def __init__(self, spaces): self.spaces = spaces
+
+    if "image_shape_hwc" in ckpt:
+        image_shape = tuple(ckpt["image_shape_hwc"])   # (H,W,C)
+    else:
+        image_shape = tuple(ckpt["image_shape"])       # (H,W,C)
+
+    action_dim  = int(ckpt["action_dim"])
+
+    obs_space = DummyDictSpace({"image": DummySpace(image_shape)})
+    act_space = DummySpace((action_dim,))
+    step = torch.tensor(0, device=device)
+
+    class Cfg: pass
+    cfg = Cfg()
+    for k, v in cfgd.items():
+        setattr(cfg, k, v)
+
+    wm = WorldModel(obs_space, act_space, step, cfg).to(device).eval()
+    wm.load_state_dict(ckpt["wm_state"], strict=True)
+    return wm
+
+
+# =========================
+# Feature extraction
+# =========================
+@torch.no_grad()
+def embed_episode_feat(wm: WorldModel, ep: dict) -> np.ndarray:
+    data = wm.preprocess(ep)
+
+    # Add batch dim (B=1)
+    for k in data:
+        data[k] = data[k].unsqueeze(0)
+
+    embed = wm.encoder(data)  # (1,T,E)
+    post, _prior = wm.dynamics.observe(embed, data["action"], data["is_first"])
+    feat = wm.dynamics.get_feat(post)  # (1,T,D)
+
+    return feat.squeeze(0).detach().cpu().numpy()  # (T,D)
+
+
+# =========================
+# Main per-experiment extraction
+# =========================
+def extract_for_experiment(
+    exp_root: str,
+    exp_id: str,
+    out_root: str,
+    ckpt_root: str,
+    ckpt_index: Dict[str, List[str]],
+    target_hw: Tuple[int, int],
+    skip_if_exists: bool,
+):
+    calib_glob = os.path.join(exp_root, "rollouts", "calibration", "*.pkl")
+    test_glob  = os.path.join(exp_root, "rollouts", "test", "*.pkl")
+
+    calib_paths = sorted(glob.glob(calib_glob))
+    test_paths  = sorted(glob.glob(test_glob))
+
+    if not calib_paths:
+        print(f"[WARN] {exp_id}: no calibration pkls, skipping.")
+        return
+
+    ckpt_path = find_ckpt_for_exp(exp_root, exp_id, ckpt_root, ckpt_index)
+    if ckpt_path is None or not os.path.exists(ckpt_path):
+        task = os.path.basename(exp_root)
+        print(f"[WARN] {exp_id}: ckpt not found for task='{task}' under {ckpt_root} (skipping)")
+        return
+
+    exp_out = os.path.join(out_root, exp_id)
+    os.makedirs(exp_out, exist_ok=True)
+
+    calib_out = os.path.join(exp_out, "calib_success_feats.npy")
+    test_feats_out = os.path.join(exp_out, "test_feats.npy")
+    test_labels_out = os.path.join(exp_out, "test_labels.npy")
+
+    if skip_if_exists and os.path.exists(calib_out) and os.path.exists(test_feats_out) and os.path.exists(test_labels_out):
+        print(f"[SKIP] {exp_id}: outputs already exist")
+        return
+
+    ckpt = torch.load(ckpt_path, map_location="cpu")
+    action_dim = int(ckpt["action_dim"])
+    device = ckpt["config"].get("device", "cpu")
+
+    print(f"\n=== EXP: {exp_id} ===")
+    print(f"exp_root: {exp_root}")
+    print(f"ckpt:     {ckpt_path}")
+    print(f"action_dim={action_dim}, device={device}, target_hw={target_hw}")
+    print(f"calib_pkls={len(calib_paths)} | test_pkls={len(test_paths)}")
+
+    wm = build_wm_from_ckpt(ckpt)
+    wm.eval()
+
+    # -------------------------
+    # CALIB: success-only feats
+    # -------------------------
+    calib_feats = []
+    calib_info = []
+
+    for p in tqdm(calib_paths, desc=f"CALIB[{exp_id}] (success only)", leave=False):
+        meta, ep = load_fiper_rgb_only(p, action_dim=action_dim, target_hw=target_hw)
+        if not bool(meta.get("successful", False)):
+            continue
+
+        feat = embed_episode_feat(wm, ep)
+        calib_feats.append(feat)
+        calib_info.append({
+            "path": p,
+            "episode": meta.get("episode", None),
+            "T": int(feat.shape[0]),
+            "successful": bool(meta.get("successful", False)),
+        })
+
+    np.save(calib_out, np.array(calib_feats, dtype=object), allow_pickle=True)
+    with open(os.path.join(exp_out, "calib_success_feats_meta.json"), "w") as f:
+        json.dump(calib_info, f, indent=2)
+    print(f"Saved {calib_out} (#success_eps={len(calib_feats)})")
+
+    # -------------------------
+    # TEST feats + labels
+    # -------------------------
+    test_feats = []
+    test_labels = []
+    test_info = []
+
+    for p in tqdm(test_paths, desc=f"TEST[{exp_id}]", leave=False):
+        meta, ep = load_fiper_rgb_only(p, action_dim=action_dim, target_hw=target_hw)
+
+        feat = embed_episode_feat(wm, ep)
+        test_feats.append(feat)
+
+        succ = bool(meta.get("successful", False))
+        test_labels.append(0 if succ else 1)
+
+        test_info.append({
+            "path": p,
+            "episode": meta.get("episode", None),
+            "T": int(feat.shape[0]),
+            "successful": succ,
+        })
+
+    np.save(test_feats_out, np.array(test_feats, dtype=object), allow_pickle=True)
+    np.save(test_labels_out, np.array(test_labels, dtype=np.int64))
+    with open(os.path.join(exp_out, "test_feats_meta.json"), "w") as f:
+        json.dump(test_info, f, indent=2)
+
+    print(f"Saved {test_feats_out} + {test_labels_out} (#test_eps={len(test_feats)})")
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--data_root", type=str, default="/data/home/buddhig/data_all")
+    ap.add_argument("--ckpt_root", type=str, default="/data/home/buddhig/projects/dreamer_fiper_offline_all",
+                    help="Root containing per-exp ckpts somewhere under it (**/wm_success_only_rgb_only.pt)")
+    ap.add_argument("--out_root", type=str, default="/data/home/buddhig/projects/dreamer_fiper_feats_all",
+                    help="Where to write per-exp features")
+    ap.add_argument("--target_h", type=int, default=64)
+    ap.add_argument("--target_w", type=int, default=64)
+    ap.add_argument("--skip_if_exists", action="store_true")
+    args = ap.parse_args()
+
+    os.makedirs(args.out_root, exist_ok=True)
+    target_hw = (int(args.target_h), int(args.target_w))
+
+    exp_roots = discover_experiment_roots(args.data_root)
+    print(f"Discovered experiment roots: {len(exp_roots)}")
+    if not exp_roots:
+        raise RuntimeError(
+            f"No experiments found under {args.data_root}. "
+            f"Expected **/rollouts/calibration/*.pkl"
+        )
+
+    ckpt_index = build_ckpt_index(args.ckpt_root)
+    n_ckpts = sum(len(v) for v in ckpt_index.values())
+    print(f"Discovered checkpoints under ckpt_root: {n_ckpts} (tasks={len(ckpt_index)})")
+    if n_ckpts == 0:
+        raise RuntimeError(
+            f"No ckpts found under {args.ckpt_root}. "
+            f"Expected **/wm_success_only_rgb_only.pt"
+        )
+
+    # helpful debug
+    print("CKPT tasks:", sorted(list(ckpt_index.keys())))
+
+    for exp_root in exp_roots:
+        exp_id = exp_id_from_root(exp_root, args.data_root)
+        extract_for_experiment(
+            exp_root=exp_root,
+            exp_id=exp_id,
+            out_root=args.out_root,
+            ckpt_root=args.ckpt_root,
+            ckpt_index=ckpt_index,
+            target_hw=target_hw,
+            skip_if_exists=args.skip_if_exists,
+        )
+
+    print("\nDone.")
+
+
+if __name__ == "__main__":
+    main()

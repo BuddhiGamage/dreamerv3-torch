@@ -63,7 +63,7 @@ defaults:
 
   # Training
   batch_size: 16
-  batch_length: 64
+  batch_length: 32
   train_ratio: 512
   pretrain: 100
   model_lr: 1e-4
@@ -180,5 +180,5 @@ debug:
   debug: True
   pretrain: 1
   prefill: 1
-  batch_size: 10
+  batch_size: 16
   batch_length: 20
