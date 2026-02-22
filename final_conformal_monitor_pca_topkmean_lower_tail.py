@@ -1,14 +1,16 @@
-# final_conformal_monitor_pca_topkmean.py
+# final_conformal_monitor_pca_topkmean_lower_tail.py
 import os, json
 import numpy as np
 from dataclasses import dataclass
-from typing import Optional, Dict, Any, List
+from typing import Optional
 
 from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
 from sklearn.metrics import accuracy_score, confusion_matrix, roc_auc_score
 
-# ROOT  = "/data/home/buddhig/projects/dreamer_fiper_feats_all/push_t__d0e55835"
+# =========================
+# CONFIG
+# =========================
 ROOT  = "/data/home/buddhig/projects/dreamer_fiper_offline/sorting/feats_both6ch64"
 ALPHA = 0.10
 
@@ -16,17 +18,21 @@ CALIB_FEATS_PATH = os.path.join(ROOT, "calib_success_feats.npy")  # object array
 TEST_FEATS_PATH  = os.path.join(ROOT, "test_feats.npy")           # object array: each (T,D)
 TEST_LABELS_PATH = os.path.join(ROOT, "test_labels.npy")          # int: 1=failure, 0=success
 
-# ---- frozen best hyperparams ----
+# ---- hyperparams (tune if needed) ----
 PCA_DIM  = 32
 BURN_IN  = 4
 TOPK     = 7
 EPS      = 1e-8
 
 
-def conformal_quantile(scores: np.ndarray, alpha: float) -> float:
+# =========================
+# Conformal quantiles
+# =========================
+def conformal_upper_quantile(scores: np.ndarray, alpha: float) -> float:
     """
     Upper-tail conformal quantile with finite-sample correction:
       r = ceil((n+1)*(1-alpha)), threshold = sorted(scores)[r-1]
+    Use when LARGE scores are anomalous.
     """
     s = np.sort(np.asarray(scores, dtype=float))
     n = s.shape[0]
@@ -35,6 +41,22 @@ def conformal_quantile(scores: np.ndarray, alpha: float) -> float:
     return float(s[r - 1])
 
 
+def conformal_lower_quantile(scores: np.ndarray, alpha: float) -> float:
+    """
+    Lower-tail conformal quantile with finite-sample correction:
+      r = ceil((n+1)*alpha), threshold = sorted(scores)[r-1]
+    Use when SMALL scores are anomalous.
+    """
+    s = np.sort(np.asarray(scores, dtype=float))
+    n = s.shape[0]
+    r = int(np.ceil((n + 1) * alpha))
+    r = min(max(1, r), n)
+    return float(s[r - 1])
+
+
+# =========================
+# PCA ref
+# =========================
 @dataclass
 class PCARef:
     scaler: StandardScaler
@@ -65,6 +87,9 @@ def pca_l2_dists(feat: np.ndarray, ref: PCARef) -> np.ndarray:
     return d
 
 
+# =========================
+# Scoring helpers
+# =========================
 def apply_burn_in(d: np.ndarray, burn_in: int) -> np.ndarray:
     if burn_in <= 0:
         return d
@@ -80,8 +105,12 @@ def topk_mean(d: np.ndarray, k: int) -> float:
     return float(np.mean(np.sort(d)[-kk:]))
 
 
-def first_crossing_time(d: np.ndarray, thr: float) -> Optional[int]:
-    idx = np.where(d > thr)[0]
+def first_crossing_time_lower(d: np.ndarray, thr: float) -> Optional[int]:
+    """
+    For LOWER-tail rule (failure if score < thr),
+    return the first index where d < thr.
+    """
+    idx = np.where(d < thr)[0]
     return int(idx[0]) if idx.size else None
 
 
@@ -91,6 +120,9 @@ def safe_auroc(y_true: np.ndarray, scores: np.ndarray) -> float:
     return float(roc_auc_score(y_true, scores))
 
 
+# =========================
+# MAIN
+# =========================
 def main():
     calib_feats = np.load(CALIB_FEATS_PATH, allow_pickle=True)
     test_feats  = np.load(TEST_FEATS_PATH, allow_pickle=True)
@@ -111,8 +143,9 @@ def main():
         calib_scores.append(topk_mean(d, TOPK))
     calib_scores = np.asarray(calib_scores, dtype=np.float64)
 
-    thr = conformal_quantile(calib_scores, ALPHA)
-    print(f"[CALIB] Threshold q (alpha={ALPHA}) from {len(calib_scores)} success rollouts: {thr:.4f}")
+    # ✅ LOWER-tail threshold (because AUROC(-score) > 0.5)
+    thr = conformal_lower_quantile(calib_scores, ALPHA)
+    print(f"[CALIB] Lower-tail threshold q (alpha={ALPHA}) from {len(calib_scores)} success rollouts: {thr:.4f}")
     print(f"[CALIB] Scores stats: mean={calib_scores.mean():.4f} std={calib_scores.std():.4f} "
           f"min={calib_scores.min():.4f} max={calib_scores.max():.4f}")
 
@@ -127,13 +160,15 @@ def main():
         d  = apply_burn_in(d0, BURN_IN)
 
         score = topk_mean(d, TOPK)
-        pred = 1 if score > thr else 0
+
+        # ✅ LOWER-tail decision: failure if score < thr
+        pred = 1 if score < thr else 0
 
         test_scores.append(score)
         y_pred.append(pred)
 
         if int(yi) == 1 and pred == 1:
-            dt_rel = first_crossing_time(d, thr)  # in burned sequence
+            dt_rel = first_crossing_time_lower(d, thr)  # in burned sequence
             if dt_rel is not None:
                 det_times.append(int(dt_rel + BURN_IN))
 
@@ -141,10 +176,6 @@ def main():
 
     test_scores = np.asarray(test_scores, dtype=np.float64)
     y_pred = np.asarray(y_pred, dtype=np.int64)
-    
-    from sklearn.metrics import roc_auc_score
-    print("AUROC(score) :", roc_auc_score(y_true, test_scores))
-    print("AUROC(-score):", roc_auc_score(y_true, -test_scores))
 
     # 4) Metrics
     acc = accuracy_score(y_true, y_pred)
@@ -152,16 +183,21 @@ def main():
     tpr = tp / (tp + fn + EPS)
     tnr = tn / (tn + fp + EPS)
     bal = 0.5 * (tpr + tnr)
-    auroc = safe_auroc(y_true, test_scores)
+
+    # Note: AUROC of raw score remains the same; the "good" direction is -score
+    auroc_score = safe_auroc(y_true, test_scores)
+    auroc_neg   = safe_auroc(y_true, -test_scores)
+
     mean_dt = float(np.mean(det_times)) if det_times else float("nan")
 
-    print("\n[TEST] Results (PCA-whiten L2 + topk_mean)")
-    print(f"  Accuracy      : {acc:.4f}")
-    print(f"  TPR (failures): {tpr:.4f}")
-    print(f"  TNR (success) : {tnr:.4f}")
-    print(f"  BalAcc        : {bal:.4f}")
-    print(f"  AUROC (score) : {auroc:.4f}")
-    print(f"  Confusion     : TN={tn} FP={fp} FN={fn} TP={tp}")
+    print("\n[TEST] Results (PCA-whiten L2 + topk_mean)  [LOWER-TAIL CONFORMAL]")
+    print(f"  Accuracy         : {acc:.4f}")
+    print(f"  TPR (failures)   : {tpr:.4f}")
+    print(f"  TNR (success)    : {tnr:.4f}")
+    print(f"  BalAcc           : {bal:.4f}")
+    print(f"  AUROC (score)    : {auroc_score:.4f}")
+    print(f"  AUROC (-score)   : {auroc_neg:.4f}   (expected > 0.5 if direction is inverted)")
+    print(f"  Confusion        : TN={tn} FP={fp} FN={fn} TP={tp}")
     print(f"  Detected failures: {len(det_times)} / {int((y_true==1).sum())}")
     print(f"  Mean detection time (steps) on detected failures: {mean_dt:.2f}")
 
@@ -170,6 +206,7 @@ def main():
         "root": ROOT,
         "alpha": float(ALPHA),
         "method": "pca_whiten_l2",
+        "tail": "lower",
         "pca_dim": int(ref.pca_dim),
         "burn_in": int(BURN_IN),
         "topk": int(TOPK),
@@ -186,7 +223,8 @@ def main():
             "TPR": float(tpr),
             "TNR": float(tnr),
             "bal_acc": float(bal),
-            "AUROC": float(auroc) if not np.isnan(auroc) else None,
+            "AUROC_score": float(auroc_score) if not np.isnan(auroc_score) else None,
+            "AUROC_neg_score": float(auroc_neg) if not np.isnan(auroc_neg) else None,
             "tn": int(tn), "fp": int(fp), "fn": int(fn), "tp": int(tp),
             "mean_detection_time": float(mean_dt),
             "num_failures": int((y_true==1).sum()),
@@ -194,13 +232,16 @@ def main():
         },
     }
 
-    out_json = os.path.join(ROOT, f"final_monitor_alpha{ALPHA:.2f}_pca{ref.pca_dim}_burn{BURN_IN}_topk{TOPK}.json")
+    out_json = os.path.join(
+        ROOT, f"final_monitor_lower_alpha{ALPHA:.2f}_pca{ref.pca_dim}_burn{BURN_IN}_topk{TOPK}.json"
+    )
     with open(out_json, "w") as f:
         json.dump(out, f, indent=2)
     print("\nSaved:", out_json)
 
-    # Save arrays for analysis/plots
-    out_npz = os.path.join(ROOT, f"final_monitor_arrays_alpha{ALPHA:.2f}_pca{ref.pca_dim}_burn{BURN_IN}_topk{TOPK}.npz")
+    out_npz = os.path.join(
+        ROOT, f"final_monitor_lower_arrays_alpha{ALPHA:.2f}_pca{ref.pca_dim}_burn{BURN_IN}_topk{TOPK}.npz"
+    )
     np.savez_compressed(
         out_npz,
         threshold=np.array([thr], dtype=np.float64),
@@ -209,12 +250,10 @@ def main():
         test_pred=y_pred.astype(np.int64),
         calib_scores=calib_scores.astype(np.float64),
         det_times=np.asarray(det_times, dtype=np.int64),
-        # object arrays can’t go into npz well; we store per-episode d0 lengths separately if needed
     )
     print("Saved:", out_npz)
 
-    # If you want to save per-episode distance sequences (variable length), store as .npy object:
-    dists_path = os.path.join(ROOT, f"per_episode_dists_alpha{ALPHA:.2f}_pca{ref.pca_dim}.npy")
+    dists_path = os.path.join(ROOT, f"per_episode_dists_lower_alpha{ALPHA:.2f}_pca{ref.pca_dim}.npy")
     np.save(dists_path, np.array(per_episode_dists, dtype=object), allow_pickle=True)
     print("Saved:", dists_path)
 
