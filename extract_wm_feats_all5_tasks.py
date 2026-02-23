@@ -216,7 +216,8 @@ def main():
     ap.add_argument("--wm_root", type=str, default="/data/home/buddhig/projects/dreamer_fiper_offline/all5_tasks")
     ap.add_argument("--out_root", type=str, default="/data/home/buddhig/projects/dreamer_fiper_feats_all5")
 
-    ap.add_argument("--tasks", type=str, nargs="*", default=["pretzel", "push_chair", "push_t", "sorting", "stacking"])
+    # ap.add_argument("--tasks", type=str, nargs="*", default=["pretzel", "push_chair", "push_t", "sorting", "stacking"])
+    ap.add_argument("--tasks", type=str, nargs="*", default=["stacking"])
     ap.add_argument("--pad_to_square", action="store_true", default=True)
     ap.add_argument("--no_pad_to_square", action="store_true", default=False)
 
