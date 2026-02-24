@@ -10,5 +10,5 @@ dm_control==1.0.9
 memory_maze==1.0.3
 crafter==1.8.0
 opencv-python==4.7.0.72
-numpy==1.23.5
+numpy==2.2.6
 tensorboard==2.17.1
