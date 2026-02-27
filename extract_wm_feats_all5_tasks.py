@@ -212,9 +212,9 @@ def parse_hw(s: str) -> Tuple[int, int]:
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--data_root", type=str, default="/data/home/buddhig/data_all")
-    ap.add_argument("--wm_root", type=str, default="/data/home/buddhig/projects/dreamer_fiper_offline/all5_tasks")
-    ap.add_argument("--out_root", type=str, default="/data/home/buddhig/projects/dreamer_fiper_feats_all5")
+    ap.add_argument("--data_root", type=str, default="/home/s447658/project/fiper/data")
+    ap.add_argument("--wm_root", type=str, default="/home/s447658/projects/dreamer_fiper_offline/all5_tasks")
+    ap.add_argument("--out_root", type=str, default="/home/s447658/projects/dreamer_fiper_feats_all5")
 
     # ap.add_argument("--tasks", type=str, nargs="*", default=["pretzel", "push_chair", "push_t", "sorting", "stacking"])
     ap.add_argument("--tasks", type=str, nargs="*", default=["stacking"])

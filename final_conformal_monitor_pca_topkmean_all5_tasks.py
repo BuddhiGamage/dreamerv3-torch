@@ -29,8 +29,8 @@ from models import WorldModel
 # =========================
 # TASK CONFIG (EDIT PATHS / SIZES HERE)
 # =========================
-DATA_ROOT = "/data/home/buddhig/data_all"
-WM_ROOT   = "/data/home/buddhig/projects/dreamer_fiper_offline/all5_tasks"
+DATA_ROOT = "/home/s447658/project/fiper/data"
+WM_ROOT   = "/home/s447658/projects/dreamer_fiper_offline/all5_tasks"
 
 # NOTE:
 # - sorting/stacking: VIEW_MODE in {"left64","right64","both6"} and TARGET_HW must match training.

@@ -561,10 +561,11 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--data_root", type=str, default="/home/s447658/project/fiper/data")
     ap.add_argument("--out_root", type=str, default="/home/s447658/projects/dreamer_fiper_offline/all5_tasks")
-    ap.add_argument("--tasks", type=str, nargs="*", default=["pretzel", "push_chair", "push_t", "sorting", "stacking"])
+    # ap.add_argument("--tasks", type=str, nargs="*", default=["pretzel", "push_chair", "push_t", "sorting", "stacking"])
+    ap.add_argument("--tasks", type=str, nargs="*", default=["sorting", "push_chair"])
     # ap.add_argument("--tasks", type=str, nargs="*", default=[ "stacking"])
 
-    ap.add_argument("--batch_size", type=int, default=8)
+    ap.add_argument("--batch_size", type=int, default=4)
     ap.add_argument("--seq_len", type=int, default=16)
     ap.add_argument("--train_steps", type=int, default=20000)
     ap.add_argument("--log_every", type=int, default=200)
