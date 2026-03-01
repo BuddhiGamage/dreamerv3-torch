@@ -1,24 +1,5 @@
-# ============================================================
-# 1) extract_wm_feats_all5_tasks.py
-# ============================================================
-# Extracts per-timestep RSSM features (feat = dynamics.get_feat(post))
-# for any/all tasks under /data/home/buddhig/data_all/{...}
-#
-# Supports:
-#   - single-cam tasks: pretzel, push_chair, push_t
-#   - concat two-view tasks: sorting, stacking (split L/R then left/right/both6)
-#
-# Produces per task:
-#   calib_success_feats.npy   (object array of [Ti, D] arrays)  SUCCESS-ONLY
-#   test_feats.npy            (object array of [Ti, D] arrays)
-#   test_labels.npy           (1=failure, 0=success)
-#   *_meta.json               (paths + episode ids + lengths)
-#
-# Usage:
-#   python extract_wm_feats_all5_tasks.py --tasks push_t sorting stacking
-#   python extract_wm_feats_all5_tasks.py --wm_root /.../all5_tasks --out_root /.../feats_all5
-#   python extract_wm_feats_all5_tasks.py --view_mode_sort both6 --view_mode_stack both6
-# ============================================================
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 
 import os, glob, pickle, json, argparse
 from typing import Dict, Tuple, Optional, List
@@ -29,6 +10,14 @@ from tqdm import tqdm
 from PIL import Image
 
 from models import WorldModel
+
+
+def set_global_seed(seed: int):
+    import random
+    random.seed(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed_all(seed)
 
 
 # -----------------------------
@@ -106,7 +95,6 @@ def preprocess_rgb_for_task(
             return np.concatenate([left, right], axis=-1)
         raise ValueError(f"Unknown view_mode={view_mode}")
 
-    # single cam
     img = rgb
     if pad_to_square:
         img = _letterbox_to_square(img)
@@ -213,11 +201,12 @@ def parse_hw(s: str) -> Tuple[int, int]:
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--data_root", type=str, default="/home/s447658/project/fiper/data")
-    ap.add_argument("--wm_root", type=str, default="/home/s447658/projects/dreamer_fiper_offline/all5_tasks")
-    ap.add_argument("--out_root", type=str, default="/home/s447658/projects/dreamer_fiper_feats_all5")
+    ap.add_argument("--wm_root", type=str, default="/home/s447658/projects/dreamer_fiper_offline/wm_all5_seeds")
+    ap.add_argument("--out_root", type=str, default="/home/s447658/projects/dreamer_fiper_feats_all5/feats_all5_seeds")
 
-    # ap.add_argument("--tasks", type=str, nargs="*", default=["pretzel", "push_chair", "push_t", "sorting", "stacking"])
-    ap.add_argument("--tasks", type=str, nargs="*", default=["push_chair"])
+    ap.add_argument("--tasks", type=str, nargs="*", default=["pretzel", "push_chair", "push_t", "sorting", "stacking"])
+    ap.add_argument("--seed", type=int, default=0)
+
     ap.add_argument("--pad_to_square", action="store_true", default=True)
     ap.add_argument("--no_pad_to_square", action="store_true", default=False)
 
@@ -227,13 +216,15 @@ def main():
     ap.add_argument("--target_hw_override", type=str, default=None)  # apply to ALL tasks if provided, e.g. "64,64"
     args = ap.parse_args()
 
+    set_global_seed(int(args.seed))
+
     pad_to_square = False if args.no_pad_to_square else bool(args.pad_to_square)
     hw_override = parse_hw(args.target_hw_override) if args.target_hw_override else None
 
     os.makedirs(args.out_root, exist_ok=True)
 
     for task in args.tasks:
-        task_wm_dir = os.path.join(args.wm_root, task)
+        task_wm_dir = os.path.join(args.wm_root, task, f"seed_{args.seed}")
         ckpt_path = os.path.join(task_wm_dir, "wm_success_only_rgb.pt")
         if not os.path.exists(ckpt_path):
             print(f"[SKIP] missing ckpt for {task}: {ckpt_path}")
@@ -246,49 +237,42 @@ def main():
         image_shape = tuple(ckpt["image_shape"])
         target_hw = tuple(ckpt.get("target_hw", (image_shape[0], image_shape[1])))
         view_mode = ckpt.get("view_mode", "single")
+        pad_sq = bool(ckpt.get("pad_to_square", pad_to_square))
 
         if task == "sorting":
             view_mode = args.view_mode_sort
         if task == "stacking":
             view_mode = args.view_mode_stack
-
         if hw_override is not None:
             target_hw = hw_override
 
-        print(f"\n[TASK] {task}")
+        print(f"\n[TASK] {task} | seed={args.seed}")
         print(f"  ckpt: {ckpt_path}")
         print(f"  image_shape (ckpt): {image_shape}")
         print(f"  target_hw (used)  : {target_hw}")
         print(f"  view_mode (used)  : {view_mode}")
+        print(f"  pad_to_square     : {pad_sq}")
         print(f"  action_dim        : {action_dim}")
 
         calib_glob = os.path.join(args.data_root, task, "rollouts", "calibration", "*.pkl")
         test_glob  = os.path.join(args.data_root, task, "rollouts", "test", "*.pkl")
-
         calib_paths = sorted(glob.glob(calib_glob))
         test_paths  = sorted(glob.glob(test_glob))
 
-        out_task_dir = os.path.join(args.out_root, task)
+        out_task_dir = os.path.join(args.out_root, task, f"seed_{args.seed}")
         os.makedirs(out_task_dir, exist_ok=True)
 
         # -------- CALIB success-only --------
         calib_feats = []
         calib_info = []
-        for p in tqdm(calib_paths, desc=f"{task} CALIB (success only)"):
+        for p in tqdm(calib_paths, desc=f"{task} CALIB seed={args.seed} (success only)"):
             meta, steps = load_fiper_pkl(p)
             if not bool(meta.get("successful", False)):
                 continue
-            ep = make_episode_from_steps(
-                steps, task, action_dim, target_hw, view_mode, pad_to_square
-            )
+            ep = make_episode_from_steps(steps, task, action_dim, target_hw, view_mode, pad_sq)
             feat = embed_episode_feat(wm, ep)
             calib_feats.append(feat)
-            calib_info.append({
-                "path": p,
-                "episode": meta.get("episode", None),
-                "T": int(feat.shape[0]),
-                "successful": True,
-            })
+            calib_info.append({"path": p, "episode": meta.get("episode", None), "T": int(feat.shape[0]), "successful": True})
 
         np.save(os.path.join(out_task_dir, "calib_success_feats.npy"),
                 np.array(calib_feats, dtype=object), allow_pickle=True)
@@ -299,23 +283,16 @@ def main():
         test_feats = []
         test_labels = []
         test_info = []
-        for p in tqdm(test_paths, desc=f"{task} TEST"):
+        for p in tqdm(test_paths, desc=f"{task} TEST seed={args.seed}"):
             meta, steps = load_fiper_pkl(p)
-            ep = make_episode_from_steps(
-                steps, task, action_dim, target_hw, view_mode, pad_to_square
-            )
+            ep = make_episode_from_steps(steps, task, action_dim, target_hw, view_mode, pad_sq)
             feat = embed_episode_feat(wm, ep)
             test_feats.append(feat)
 
             succ = bool(meta.get("successful", False))
             test_labels.append(0 if succ else 1)
 
-            test_info.append({
-                "path": p,
-                "episode": meta.get("episode", None),
-                "T": int(feat.shape[0]),
-                "successful": succ,
-            })
+            test_info.append({"path": p, "episode": meta.get("episode", None), "T": int(feat.shape[0]), "successful": succ})
 
         np.save(os.path.join(out_task_dir, "test_feats.npy"),
                 np.array(test_feats, dtype=object), allow_pickle=True)

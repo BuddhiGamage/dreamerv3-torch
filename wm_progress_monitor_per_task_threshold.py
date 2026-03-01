@@ -20,7 +20,7 @@ Expected structure:
 
 python wm_progress_monitor_per_task_threshold.py \
   --data_root /home/s447658/projects/dreamer_fiper_feats_all5 \
-  --tasks pretzel push_t stacking \
+  --tasks pretzel push_t stacking sorting push_chair\
   --alpha 0.10 --bins 20 \
   --window_mode adaptive --window_frac 0.2 --min_window 3 \
   --score_agg topk_mean --topk 7 \
@@ -250,18 +250,38 @@ def main():
         refs = fit_bin_refs(list(calib), args.bins, args.var_floor)
 
         # ---------- build success window scores ----------
-        calib_scores = []
-        for feat in tqdm(calib, desc=f"{task} CALIB", leave=False):
+        # calib_scores = []
+        # for feat in tqdm(calib, desc=f"{task} CALIB", leave=False):
+        #     T = feat.shape[0]
+        #     W = window_len(T, args.window_mode, 5, args.window_frac, args.min_window)
+        #     d = per_timestep_diag_mahal(feat, refs)
+        #     s = sliding_window_scores(d, W, args.score_agg, args.topk)
+        #     calib_scores.append(s)
+
+        # calib_scores = np.concatenate(calib_scores)
+
+        # thr = conformal_upper_quantile(calib_scores, args.alpha)
+        # print(f"[CALIB] thr_task={thr:.6f}")
+
+        calib_ep_scores = []
+        for feat in calib:
             T = feat.shape[0]
             W = window_len(T, args.window_mode, 5, args.window_frac, args.min_window)
+
             d = per_timestep_diag_mahal(feat, refs)
-            s = sliding_window_scores(d, W, args.score_agg, args.topk)
-            calib_scores.append(s)
+            s = sliding_window_scores(d, W=W, agg=args.score_agg, topk=args.topk)
 
-        calib_scores = np.concatenate(calib_scores)
+            # IMPORTANT: calibrate on SAME statistic you use to judge episodes
+            ep_score = float(np.max(s))          # option A (matches your debug)
+            # ep_score = topk_mean(s, topk)      # option B (less spiky, often better)
+            calib_ep_scores.append(ep_score)
 
-        thr = conformal_upper_quantile(calib_scores, args.alpha)
-        print(f"[CALIB] thr_task={thr:.6f}")
+        calib_ep_scores = np.asarray(calib_ep_scores, dtype=np.float64)
+        thr = conformal_upper_quantile(calib_ep_scores, args.alpha)
+
+        print(f"[CALIB] thr_task={thr:.6f} (episode-level)")
+        print(f"[CALIB] ep_score stats: mean={calib_ep_scores.mean():.4f} std={calib_ep_scores.std():.4f} "
+            f"min={calib_ep_scores.min():.4f} max={calib_ep_scores.max():.4f}")
 
         # ---------- test ----------
         y_pred = []
@@ -317,6 +337,24 @@ def main():
         json.dump(results, f, indent=2)
 
     print("\nSaved:", out_path)
+
+    # DEBUG: success episode scores
+    succ_scores = []
+    for feat, yi in zip(test, y):
+        if yi == 0:
+            T = feat.shape[0]
+            W = window_len(T, args.window_mode, 5, args.window_frac, args.min_window)
+            d = per_timestep_diag_mahal(feat, refs)
+            s = sliding_window_scores(d, W, args.score_agg, args.topk)
+            succ_scores.append(np.max(s))
+
+    succ_scores = np.array(succ_scores)
+
+    print("[DEBUG] push_chair success episode scores:")
+    print("  min :", succ_scores.min())
+    print("  median :", np.median(succ_scores))
+    print("  max :", succ_scores.max())
+    print("  thr :", thr)
 
 
 if __name__ == "__main__":

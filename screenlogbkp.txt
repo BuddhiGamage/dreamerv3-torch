@@ -1,0 +1,379 @@
+(dreamer) s447658@hcc3:~/project/dreamerv3-torch$ ./run_all_seeds.sh
+
+====================
+[TASK] pretzel | seed=0
+[CALIB_GLOB] /home/s447658/project/fiper/data/pretzel/rollouts/calibration/*.pkl
+Found calibration PKLs: 10
+[RAW] first success rgb0 shape: (240,320,3)
+[PROC] target_hw=(256, 256) pad_to_square=True view_mode=single
+[PROC] image_shape=(256, 256, 3) action_dim=5
+Success-only episodes loaded: 10
+Encoder CNN shapes: {'image': (256, 256, 3)}
+Encoder MLP shapes: {}
+Decoder CNN shapes: {'image': (256, 256, 3)}
+Decoder MLP shapes: {}
+Optimizer model_opt has 65084357 variables.
+TRAIN pretzel seed=0:   1%|▋                                                                     | 199/20000 [00:33<54:27,  6.06it/s][pretzel][seed=0][   200] decoder=0.0000 reward=1.0536 cont=0.0006 kl=26.8954 (33.8s)
+TRAIN pretzel seed=0:   2%|█▍                                                                    | 399/20000 [01:06<53:52,  6.06it/s][pretzel][seed=0][   400] decoder=0.0000 reward=1.0386 cont=0.0001 kl=34.8360 (33.2s)
+TRAIN pretzel seed=0:   3%|██                                                                    | 599/20000 [01:39<52:56,  6.11it/s][pretzel][seed=0][   600] decoder=0.0000 reward=1.0016 cont=0.0000 kl=34.9803 (33.0s)
+TRAIN pretzel seed=0:   4%|██▊                                                                   | 799/20000 [02:13<53:26,  5.99it/s][pretzel][seed=0][   800] decoder=0.0000 reward=1.0104 cont=0.0000 kl=33.4829 (33.2s)
+TRAIN pretzel seed=0:   5%|███▍                                                                  | 999/20000 [02:46<52:37,  6.02it/s][pretzel][seed=0][  1000] decoder=0.0000 reward=1.0365 cont=0.0001 kl=35.2024 (33.3s)
+TRAIN pretzel seed=0:   6%|████▏                                                                | 1199/20000 [03:19<52:05,  6.02it/s][pretzel][seed=0][  1200] decoder=0.0000 reward=0.9995 cont=0.0000 kl=33.3381 (33.3s)
+TRAIN pretzel seed=0:   7%|████▊                                                                | 1399/20000 [03:52<52:30,  5.90it/s][pretzel][seed=0][  1400] decoder=0.0000 reward=1.0329 cont=0.0002 kl=34.7903 (33.2s)
+TRAIN pretzel seed=0:   8%|█████▌                                                               | 1599/20000 [04:26<50:55,  6.02it/s][pretzel][seed=0][  1600] decoder=0.0000 reward=1.0017 cont=0.0000 kl=30.8292 (33.2s)
+TRAIN pretzel seed=0:   9%|██████▏                                                              | 1799/20000 [04:59<50:37,  5.99it/s][pretzel][seed=0][  1800] decoder=0.0000 reward=1.0297 cont=0.0001 kl=34.2811 (33.2s)
+TRAIN pretzel seed=0:  10%|██████▉                                                              | 1999/20000 [05:32<50:12,  5.98it/s][pretzel][seed=0][  2000] decoder=0.0000 reward=0.9900 cont=0.0000 kl=28.3367 (32.9s)
+TRAIN pretzel seed=0:  11%|███████▌                                                             | 2199/20000 [06:03<48:33,  6.11it/s][pretzel][seed=0][  2200] decoder=0.0000 reward=0.9881 cont=0.0000 kl=28.0504 (31.2s)
+TRAIN pretzel seed=0:  12%|████████▎                                                            | 2399/20000 [06:36<48:25,  6.06it/s][pretzel][seed=0][  2400] decoder=0.0000 reward=1.0051 cont=0.0000 kl=26.2748 (33.0s)
+TRAIN pretzel seed=0:  13%|████████▉                                                            | 2599/20000 [07:09<49:23,  5.87it/s][pretzel][seed=0][  2600] decoder=0.0000 reward=1.0044 cont=0.0000 kl=26.4758 (33.2s)
+TRAIN pretzel seed=0:  14%|█████████▋                                                           | 2799/20000 [07:42<48:11,  5.95it/s][pretzel][seed=0][  2800] decoder=0.0000 reward=1.0234 cont=0.0000 kl=26.8876 (33.2s)
+TRAIN pretzel seed=0:  15%|██████████▎                                                          | 2999/20000 [08:15<46:31,  6.09it/s][pretzel][seed=0][  3000] decoder=0.0000 reward=1.0082 cont=0.0000 kl=26.6757 (32.9s)
+TRAIN pretzel seed=0:  16%|███████████                                                          | 3199/20000 [08:48<45:52,  6.10it/s][pretzel][seed=0][  3200] decoder=0.0000 reward=1.0257 cont=0.0000 kl=28.6800 (32.9s)
+TRAIN pretzel seed=0:  17%|███████████▋                                                         | 3399/20000 [09:21<45:59,  6.02it/s][pretzel][seed=0][  3400] decoder=0.0000 reward=1.0337 cont=0.0000 kl=20.9556 (32.9s)
+TRAIN pretzel seed=0:  18%|████████████▍                                                        | 3599/20000 [09:54<43:07,  6.34it/s][pretzel][seed=0][  3600] decoder=0.0000 reward=1.0196 cont=0.0000 kl=24.2218 (32.7s)
+TRAIN pretzel seed=0:  19%|█████████████                                                        | 3799/20000 [10:27<44:37,  6.05it/s][pretzel][seed=0][  3800] decoder=0.0000 reward=1.0158 cont=0.0000 kl=24.6490 (32.8s)
+TRAIN pretzel seed=0:  20%|█████████████▊                                                       | 3999/20000 [10:59<43:43,  6.10it/s][pretzel][seed=0][  4000] decoder=0.0000 reward=1.0174 cont=0.0000 kl=22.6849 (32.9s)
+TRAIN pretzel seed=0:  21%|██████████████▍                                                      | 4199/20000 [11:32<43:22,  6.07it/s][pretzel][seed=0][  4200] decoder=0.0000 reward=1.0255 cont=0.0000 kl=27.0640 (33.0s)
+TRAIN pretzel seed=0:  22%|███████████████▏                                                     | 4399/20000 [12:05<42:25,  6.13it/s][pretzel][seed=0][  4400] decoder=0.0000 reward=1.0370 cont=0.0000 kl=22.5452 (33.0s)
+TRAIN pretzel seed=0:  23%|███████████████▊                                                     | 4599/20000 [12:39<42:17,  6.07it/s][pretzel][seed=0][  4600] decoder=0.0000 reward=1.0305 cont=0.0000 kl=26.2884 (33.0s)
+TRAIN pretzel seed=0:  24%|████████████████▌                                                    | 4799/20000 [13:12<42:07,  6.01it/s][pretzel][seed=0][  4800] decoder=0.0000 reward=1.0180 cont=0.0000 kl=25.4981 (33.0s)
+TRAIN pretzel seed=0:  25%|█████████████████▏                                                   | 4999/20000 [13:45<42:09,  5.93it/s][pretzel][seed=0][  5000] decoder=0.0000 reward=1.0203 cont=0.0000 kl=28.0535 (33.3s)
+TRAIN pretzel seed=0:  26%|█████████████████▉                                                   | 5199/20000 [14:18<41:07,  6.00it/s][pretzel][seed=0][  5200] decoder=0.0000 reward=1.0139 cont=0.0000 kl=27.3472 (33.4s)
+TRAIN pretzel seed=0:  27%|██████████████████▋                                                  | 5399/20000 [14:51<40:18,  6.04it/s][pretzel][seed=0][  5400] decoder=0.0000 reward=1.0202 cont=0.0000 kl=31.4914 (33.2s)
+TRAIN pretzel seed=0:  28%|███████████████████▎                                                 | 5599/20000 [15:25<39:34,  6.06it/s][pretzel][seed=0][  5600] decoder=0.0000 reward=1.0085 cont=0.0000 kl=24.1320 (33.1s)
+TRAIN pretzel seed=0:  29%|████████████████████                                                 | 5799/20000 [15:58<40:02,  5.91it/s][pretzel][seed=0][  5800] decoder=0.0000 reward=1.0072 cont=0.0000 kl=23.3582 (33.4s)
+TRAIN pretzel seed=0:  30%|████████████████████▋                                                | 5999/20000 [16:31<37:57,  6.15it/s][pretzel][seed=0][  6000] decoder=0.0000 reward=1.0204 cont=0.0000 kl=20.0232 (33.0s)
+TRAIN pretzel seed=0:  31%|█████████████████████▍                                               | 6199/20000 [17:04<37:47,  6.09it/s][pretzel][seed=0][  6200] decoder=0.0000 reward=1.0025 cont=0.0000 kl=25.1705 (33.0s)
+TRAIN pretzel seed=0:  32%|██████████████████████                                               | 6399/20000 [17:37<37:47,  6.00it/s][pretzel][seed=0][  6400] decoder=0.0000 reward=0.9784 cont=0.0000 kl=26.4015 (32.9s)
+TRAIN pretzel seed=0:  33%|██████████████████████▊                                              | 6599/20000 [18:10<36:47,  6.07it/s][pretzel][seed=0][  6600] decoder=0.0000 reward=1.0321 cont=0.0000 kl=28.8760 (33.1s)
+TRAIN pretzel seed=0:  34%|███████████████████████▍                                             | 6799/20000 [18:43<36:14,  6.07it/s][pretzel][seed=0][  6800] decoder=0.0000 reward=1.0322 cont=0.0000 kl=25.5762 (33.0s)
+TRAIN pretzel seed=0:  35%|████████████████████████▏                                            | 6999/20000 [19:16<35:42,  6.07it/s][pretzel][seed=0][  7000] decoder=0.0000 reward=1.0172 cont=0.0000 kl=27.2037 (33.0s)
+TRAIN pretzel seed=0:  36%|████████████████████████▊                                            | 7199/20000 [19:49<35:35,  6.00it/s][pretzel][seed=0][  7200] decoder=0.0000 reward=1.0248 cont=0.0000 kl=16.6993 (32.7s)
+TRAIN pretzel seed=0:  37%|█████████████████████████▌                                           | 7399/20000 [20:22<34:42,  6.05it/s][pretzel][seed=0][  7400] decoder=0.0000 reward=1.0045 cont=0.0000 kl=25.3965 (33.1s)
+TRAIN pretzel seed=0:  38%|██████████████████████████▏                                          | 7599/20000 [20:55<34:18,  6.03it/s][pretzel][seed=0][  7600] decoder=0.0000 reward=1.0184 cont=0.0000 kl=19.3444 (33.3s)
+TRAIN pretzel seed=0:  39%|██████████████████████████▉                                          | 7799/20000 [21:28<34:00,  5.98it/s][pretzel][seed=0][  7800] decoder=0.0000 reward=1.0290 cont=0.0000 kl=24.5335 (33.4s)
+TRAIN pretzel seed=0:  40%|███████████████████████████▌                                         | 7999/20000 [22:01<33:03,  6.05it/s][pretzel][seed=0][  8000] decoder=0.0000 reward=1.0215 cont=0.0000 kl=14.7899 (33.0s)
+TRAIN pretzel seed=0:  41%|████████████████████████████▎                                        | 8199/20000 [22:35<32:41,  6.02it/s][pretzel][seed=0][  8200] decoder=0.0000 reward=1.0224 cont=0.0000 kl=22.0518 (33.1s)
+TRAIN pretzel seed=0:  42%|████████████████████████████▉                                        | 8399/20000 [23:07<31:57,  6.05it/s][pretzel][seed=0][  8400] decoder=0.0000 reward=0.9845 cont=0.0000 kl=18.4818 (32.8s)
+TRAIN pretzel seed=0:  43%|█████████████████████████████▋                                       | 8599/20000 [23:40<31:30,  6.03it/s][pretzel][seed=0][  8600] decoder=0.0000 reward=1.0149 cont=0.0000 kl=22.5030 (32.9s)
+TRAIN pretzel seed=0:  44%|██████████████████████████████▎                                      | 8799/20000 [24:13<30:45,  6.07it/s][pretzel][seed=0][  8800] decoder=0.0000 reward=0.9910 cont=0.0000 kl=26.1692 (33.0s)
+TRAIN pretzel seed=0:  45%|███████████████████████████████                                      | 8999/20000 [24:47<29:31,  6.21it/s][pretzel][seed=0][  9000] decoder=0.0000 reward=1.0122 cont=0.0000 kl=21.9927 (33.9s)
+TRAIN pretzel seed=0:  46%|███████████████████████████████▋                                     | 9199/20000 [25:19<28:59,  6.21it/s][pretzel][seed=0][  9200] decoder=0.0000 reward=1.0313 cont=0.0000 kl=26.8057 (32.3s)
+TRAIN pretzel seed=0:  47%|████████████████████████████████▍                                    | 9399/20000 [25:51<25:59,  6.80it/s][pretzel][seed=0][  9400] decoder=0.0000 reward=0.9963 cont=0.0000 kl=21.3042 (31.2s)
+TRAIN pretzel seed=0:  48%|█████████████████████████████████                                    | 9599/20000 [26:21<25:11,  6.88it/s][pretzel][seed=0][  9600] decoder=0.0000 reward=1.0020 cont=0.0000 kl=20.8701 (30.2s)
+TRAIN pretzel seed=0:  49%|█████████████████████████████████▊                                   | 9799/20000 [26:50<24:49,  6.85it/s][pretzel][seed=0][  9800] decoder=0.0000 reward=0.9937 cont=0.0000 kl=24.1586 (29.7s)
+TRAIN pretzel seed=0:  50%|██████████████████████████████████▍                                  | 9999/20000 [27:22<24:43,  6.74it/s][pretzel][seed=0][ 10000] decoder=0.0000 reward=0.9962 cont=0.0000 kl=18.2936 (31.9s)
+TRAIN pretzel seed=0:  51%|██████████████████████████████████▋                                 | 10199/20000 [27:53<26:51,  6.08it/s][pretzel][seed=0][ 10200] decoder=0.0000 reward=1.0272 cont=0.0000 kl=21.7060 (30.4s)
+TRAIN pretzel seed=0:  52%|███████████████████████████████████▎                                | 10399/20000 [28:25<23:37,  6.77it/s][pretzel][seed=0][ 10400] decoder=0.0000 reward=1.0121 cont=0.0000 kl=14.5114 (32.7s)
+TRAIN pretzel seed=0:  53%|████████████████████████████████████                                | 10599/20000 [28:57<25:39,  6.11it/s][pretzel][seed=0][ 10600] decoder=0.0000 reward=1.0493 cont=0.0000 kl=20.1475 (31.8s)
+TRAIN pretzel seed=0:  54%|████████████████████████████████████▋                               | 10799/20000 [29:30<25:23,  6.04it/s][pretzel][seed=0][ 10800] decoder=0.0000 reward=1.0282 cont=0.0000 kl=23.3405 (32.7s)
+TRAIN pretzel seed=0:  55%|█████████████████████████████████████▍                              | 10999/20000 [30:03<24:40,  6.08it/s][pretzel][seed=0][ 11000] decoder=0.0000 reward=1.0064 cont=0.0000 kl=26.1704 (33.1s)
+TRAIN pretzel seed=0:  56%|██████████████████████████████████████                              | 11199/20000 [30:36<23:57,  6.12it/s][pretzel][seed=0][ 11200] decoder=0.0000 reward=0.9945 cont=0.0000 kl=21.2468 (32.8s)
+TRAIN pretzel seed=0:  57%|██████████████████████████████████████▊                             | 11399/20000 [31:09<23:43,  6.04it/s][pretzel][seed=0][ 11400] decoder=0.0000 reward=1.0057 cont=0.0000 kl=22.3062 (32.8s)
+TRAIN pretzel seed=0:  58%|███████████████████████████████████████▍                            | 11599/20000 [31:42<23:00,  6.08it/s][pretzel][seed=0][ 11600] decoder=0.0000 reward=1.0028 cont=0.0000 kl=17.0580 (33.1s)
+TRAIN pretzel seed=0:  59%|████████████████████████████████████████                            | 11799/20000 [32:15<22:44,  6.01it/s][pretzel][seed=0][ 11800] decoder=0.0000 reward=1.0051 cont=0.0000 kl=24.7857 (33.2s)
+TRAIN pretzel seed=0:  60%|████████████████████████████████████████▊                           | 11999/20000 [32:48<22:05,  6.04it/s][pretzel][seed=0][ 12000] decoder=0.0000 reward=0.9903 cont=0.0000 kl=19.1819 (33.1s)
+TRAIN pretzel seed=0:  61%|█████████████████████████████████████████▍                          | 12199/20000 [33:21<21:22,  6.08it/s][pretzel][seed=0][ 12200] decoder=0.0000 reward=1.0056 cont=0.0000 kl=21.0030 (32.9s)
+TRAIN pretzel seed=0:  62%|██████████████████████████████████████████▏                         | 12399/20000 [33:54<21:13,  5.97it/s][pretzel][seed=0][ 12400] decoder=0.0000 reward=1.0354 cont=0.0000 kl=19.2377 (33.3s)
+TRAIN pretzel seed=0:  63%|██████████████████████████████████████████▊                         | 12599/20000 [34:27<20:21,  6.06it/s][pretzel][seed=0][ 12600] decoder=0.0000 reward=1.0101 cont=0.0000 kl=14.7385 (33.1s)
+TRAIN pretzel seed=0:  64%|███████████████████████████████████████████▌                        | 12799/20000 [35:00<19:48,  6.06it/s][pretzel][seed=0][ 12800] decoder=0.0000 reward=1.0367 cont=0.0000 kl=22.7234 (33.0s)
+TRAIN pretzel seed=0:  65%|████████████████████████████████████████████▏                       | 12999/20000 [35:33<19:12,  6.08it/s][pretzel][seed=0][ 13000] decoder=0.0000 reward=1.0187 cont=0.0000 kl=18.4658 (32.9s)
+TRAIN pretzel seed=0:  66%|████████████████████████████████████████████▉                       | 13199/20000 [36:06<18:27,  6.14it/s][pretzel][seed=0][ 13200] decoder=0.0000 reward=0.9907 cont=0.0000 kl=23.6471 (32.8s)
+TRAIN pretzel seed=0:  67%|█████████████████████████████████████████████▌                      | 13399/20000 [36:39<17:58,  6.12it/s][pretzel][seed=0][ 13400] decoder=0.0000 reward=1.0140 cont=0.0000 kl=20.9380 (32.7s)
+TRAIN pretzel seed=0:  68%|██████████████████████████████████████████████▏                     | 13599/20000 [37:12<17:31,  6.08it/s][pretzel][seed=0][ 13600] decoder=0.0000 reward=0.9847 cont=0.0000 kl=16.3847 (32.8s)
+TRAIN pretzel seed=0:  69%|██████████████████████████████████████████████▉                     | 13799/20000 [37:44<16:52,  6.12it/s][pretzel][seed=0][ 13800] decoder=0.0000 reward=1.0152 cont=0.0000 kl=18.8986 (32.7s)
+TRAIN pretzel seed=0:  70%|███████████████████████████████████████████████▌                    | 13999/20000 [38:17<16:12,  6.17it/s][pretzel][seed=0][ 14000] decoder=0.0000 reward=1.0076 cont=0.0000 kl=21.2713 (32.6s)
+TRAIN pretzel seed=0:  71%|████████████████████████████████████████████████▎                   | 14199/20000 [38:50<15:37,  6.19it/s][pretzel][seed=0][ 14200] decoder=0.0000 reward=1.0585 cont=0.0000 kl=18.9870 (32.5s)
+TRAIN pretzel seed=0:  72%|████████████████████████████████████████████████▉                   | 14399/20000 [39:22<15:21,  6.08it/s][pretzel][seed=0][ 14400] decoder=0.0000 reward=1.0367 cont=0.0000 kl=16.6007 (32.8s)
+TRAIN pretzel seed=0:  73%|█████████████████████████████████████████████████▋                  | 14599/20000 [39:55<14:46,  6.09it/s][pretzel][seed=0][ 14600] decoder=0.0000 reward=0.9738 cont=0.0000 kl=25.2264 (33.1s)
+TRAIN pretzel seed=0:  74%|██████████████████████████████████████████████████▎                 | 14799/20000 [40:28<14:25,  6.01it/s][pretzel][seed=0][ 14800] decoder=0.0000 reward=1.0351 cont=0.0000 kl=22.5995 (33.1s)
+TRAIN pretzel seed=0:  75%|██████████████████████████████████████████████████▉                 | 14999/20000 [41:02<13:49,  6.03it/s][pretzel][seed=0][ 15000] decoder=0.0000 reward=0.9965 cont=0.0000 kl=16.3474 (33.2s)
+TRAIN pretzel seed=0:  76%|███████████████████████████████████████████████████▋                | 15199/20000 [41:34<11:47,  6.79it/s][pretzel][seed=0][ 15200] decoder=0.0000 reward=1.0201 cont=0.0000 kl=18.1625 (32.8s)
+TRAIN pretzel seed=0:  77%|████████████████████████████████████████████████████▎               | 15399/20000 [42:05<12:52,  5.96it/s][pretzel][seed=0][ 15400] decoder=0.0000 reward=1.0315 cont=0.0000 kl=13.3767 (30.1s)
+TRAIN pretzel seed=0:  78%|█████████████████████████████████████████████████████               | 15599/20000 [42:38<12:14,  5.99it/s][pretzel][seed=0][ 15600] decoder=0.0000 reward=0.9991 cont=0.0000 kl=17.5346 (33.6s)
+TRAIN pretzel seed=0:  79%|█████████████████████████████████████████████████████▋              | 15799/20000 [43:11<11:26,  6.12it/s][pretzel][seed=0][ 15800] decoder=0.0000 reward=1.0629 cont=0.0000 kl=15.9335 (32.7s)
+TRAIN pretzel seed=0:  80%|██████████████████████████████████████████████████████▍             | 15999/20000 [43:44<10:59,  6.06it/s][pretzel][seed=0][ 16000] decoder=0.0000 reward=1.0284 cont=0.0000 kl=13.8869 (32.9s)
+TRAIN pretzel seed=0:  81%|███████████████████████████████████████████████████████             | 16199/20000 [44:16<10:24,  6.09it/s][pretzel][seed=0][ 16200] decoder=0.0000 reward=1.0086 cont=0.0000 kl=20.0243 (32.7s)
+TRAIN pretzel seed=0:  82%|███████████████████████████████████████████████████████▊            | 16399/20000 [44:49<09:42,  6.18it/s][pretzel][seed=0][ 16400] decoder=0.0000 reward=1.0432 cont=0.0000 kl=17.6695 (32.6s)
+TRAIN pretzel seed=0:  83%|████████████████████████████████████████████████████████▍           | 16599/20000 [45:22<09:20,  6.07it/s][pretzel][seed=0][ 16600] decoder=0.0000 reward=1.0016 cont=0.0000 kl=13.5416 (32.7s)
+TRAIN pretzel seed=0:  84%|█████████████████████████████████████████████████████████           | 16799/20000 [45:55<08:38,  6.18it/s][pretzel][seed=0][ 16800] decoder=0.0000 reward=1.0455 cont=0.0000 kl=22.3657 (32.8s)
+TRAIN pretzel seed=0:  85%|█████████████████████████████████████████████████████████▊          | 16999/20000 [46:28<08:16,  6.04it/s][pretzel][seed=0][ 17000] decoder=0.0000 reward=0.9920 cont=0.0000 kl=16.2414 (33.0s)
+TRAIN pretzel seed=0:  86%|██████████████████████████████████████████████████████████▍         | 17199/20000 [47:00<07:38,  6.11it/s][pretzel][seed=0][ 17200] decoder=0.0000 reward=0.9871 cont=0.0000 kl=11.8522 (32.8s)
+TRAIN pretzel seed=0:  87%|███████████████████████████████████████████████████████████▏        | 17399/20000 [47:33<07:04,  6.13it/s][pretzel][seed=0][ 17400] decoder=0.0000 reward=1.0286 cont=0.0000 kl=19.3782 (32.7s)
+TRAIN pretzel seed=0:  88%|███████████████████████████████████████████████████████████▊        | 17599/20000 [48:06<06:35,  6.07it/s][pretzel][seed=0][ 17600] decoder=0.0000 reward=1.0221 cont=0.0000 kl=18.1043 (32.8s)
+TRAIN pretzel seed=0:  89%|████████████████████████████████████████████████████████████▌       | 17799/20000 [48:39<06:00,  6.11it/s][pretzel][seed=0][ 17800] decoder=0.0000 reward=1.0315 cont=0.0000 kl=18.7670 (32.7s)
+TRAIN pretzel seed=0:  90%|█████████████████████████████████████████████████████████████▏      | 17999/20000 [49:11<05:25,  6.14it/s][pretzel][seed=0][ 18000] decoder=0.0000 reward=1.0182 cont=0.0000 kl=12.7340 (32.9s)
+TRAIN pretzel seed=0:  91%|█████████████████████████████████████████████████████████████▉      | 18199/20000 [49:44<04:54,  6.12it/s][pretzel][seed=0][ 18200] decoder=0.0000 reward=1.0130 cont=0.0000 kl=21.1747 (32.9s)
+TRAIN pretzel seed=0:  92%|██████████████████████████████████████████████████████████████▌     | 18399/20000 [50:17<04:23,  6.06it/s][pretzel][seed=0][ 18400] decoder=0.0000 reward=1.0132 cont=0.0000 kl=14.3042 (32.9s)
+TRAIN pretzel seed=0:  92%|██████████████████████████████████████████████████████████████▌     | 18399/20000 [50:17<04:23,  6.06it/s][pretzel][seed=0][ 18400] decoder=0.0000 reward=1.0132 cont=0.0000 kl=14.3042 (32.9s)
+TRAIN pretzel seed=0:  93%|███████████████████████████████████████████████████████████████▏    | 18599/20000 [50:50<03:49,  6.10it/s][pretzel][seed=0][ 18600] decoder=0.0000 reward=1.0120 cont=0.0000 kl=19.6555 (33.0s)
+TRAIN pretzel seed=0:  94%|███████████████████████████████████████████████████████████████▉    | 18799/20000 [51:23<03:17,  6.07it/s][pretzel][seed=0][ 18800] decoder=0.0000 reward=1.0248 cont=0.0000 kl=15.5493 (32.9s)
+TRAIN pretzel seed=0:  95%|████████████████████████████████████████████████████████████████▌   | 18999/20000 [51:56<02:44,  6.10it/s][pretzel][seed=0][ 19000] decoder=0.0000 reward=1.0492 cont=0.0000 kl=17.8959 (32.9s)
+TRAIN pretzel seed=0:  96%|█████████████████████████████████████████████████████████████████▎  | 19199/20000 [52:29<02:11,  6.08it/s][pretzel][seed=0][ 19200] decoder=0.0000 reward=1.0360 cont=0.0000 kl=12.9871 (32.9s)
+TRAIN pretzel seed=0:  97%|█████████████████████████████████████████████████████████████████▉  | 19399/20000 [53:02<01:37,  6.13it/s][pretzel][seed=0][ 19400] decoder=0.0000 reward=1.0360 cont=0.0000 kl=17.9601 (32.8s)
+TRAIN pretzel seed=0:  98%|██████████████████████████████████████████████████████████████████▋ | 19599/20000 [53:35<01:07,  5.93it/s][pretzel][seed=0][ 19600] decoder=0.0000 reward=1.0084 cont=0.0000 kl=14.1622 (32.9s)
+TRAIN pretzel seed=0:  99%|███████████████████████████████████████████████████████████████████▎| 19799/20000 [54:08<00:32,  6.14it/s][pretzel][seed=0][ 19800] decoder=0.0000 reward=0.9933 cont=0.0000 kl=15.2850 (33.4s)
+TRAIN pretzel seed=0: 100%|███████████████████████████████████████████████████████████████████▉| 19999/20000 [54:41<00:00,  6.13it/s][pretzel][seed=0][ 20000] decoder=0.0000 reward=1.0270 cont=0.0000 kl=16.5709 (32.8s)
+TRAIN pretzel seed=0: 100%|████████████████████████████████████████████████████████████████████| 20000/20000 [54:41<00:00,  6.09it/s]
+Saved: /home/s447658/projects/dreamer_fiper_offline/wm_all5_seeds/pretzel/seed_0/wm_success_only_rgb.pt
+Saved: /home/s447658/projects/dreamer_fiper_offline/wm_all5_seeds/pretzel/seed_0/wm_success_only_rgb_meta.json
+
+====================
+[TASK] push_chair | seed=0
+[CALIB_GLOB] /home/s447658/project/fiper/data/push_chair/rollouts/calibration/*.pkl
+Found calibration PKLs: 10
+[RAW] first success rgb0 shape: (270,480,3)
+[PROC] target_hw=(512, 512) pad_to_square=True view_mode=single
+[PROC] image_shape=(512, 512, 3) action_dim=3
+Success-only episodes loaded: 10
+Encoder CNN shapes: {'image': (512, 512, 3)}
+Encoder MLP shapes: {}
+Decoder CNN shapes: {'image': (512, 512, 3)}
+Decoder MLP shapes: {}
+Optimizer model_opt has 229481925 variables.
+TRAIN push_chair seed=0:   1%|▋                                                                | 199/20000 [01:32<2:29:26,  2.21it/s][push_chair][seed=0][   200] decoder=0.0000 reward=1.1288 cont=0.1682 kl=4.8515 (92.8s)
+TRAIN push_chair seed=0:   2%|█▎                                                               | 399/20000 [03:02<2:28:44,  2.20it/s][push_chair][seed=0][   400] decoder=0.0000 reward=1.2313 cont=0.1540 kl=1.5262 (90.5s)
+TRAIN push_chair seed=0:   3%|█▉                                                               | 599/20000 [04:33<2:26:18,  2.21it/s][push_chair][seed=0][   600] decoder=0.0000 reward=1.2422 cont=0.1828 kl=1.3158 (90.9s)
+TRAIN push_chair seed=0:   4%|██▌                                                              | 799/20000 [06:04<2:26:21,  2.19it/s][push_chair][seed=0][   800] decoder=0.0000 reward=1.1546 cont=0.1196 kl=1.8361 (90.9s)
+TRAIN push_chair seed=0:   5%|███▏                                                             | 999/20000 [07:36<2:25:42,  2.17it/s][push_chair][seed=0][  1000] decoder=0.0000 reward=1.2242 cont=0.1575 kl=1.3085 (91.5s)
+TRAIN push_chair seed=0:   6%|███▊                                                            | 1199/20000 [09:06<2:21:54,  2.21it/s][push_chair][seed=0][  1200] decoder=0.0000 reward=1.0476 cont=0.0799 kl=6.2383 (90.8s)
+TRAIN push_chair seed=0:   7%|████▍                                                           | 1399/20000 [10:37<2:21:28,  2.19it/s][push_chair][seed=0][  1400] decoder=0.0000 reward=1.0377 cont=0.0379 kl=9.5926 (91.0s)
+TRAIN push_chair seed=0:   8%|█████                                                           | 1599/20000 [12:08<2:19:18,  2.20it/s][push_chair][seed=0][  1600] decoder=0.0000 reward=1.0261 cont=0.1102 kl=5.5764 (90.8s)
+TRAIN push_chair seed=0:   9%|█████▊                                                          | 1799/20000 [13:39<2:18:27,  2.19it/s][push_chair][seed=0][  1800] decoder=0.0000 reward=1.0786 cont=0.0027 kl=7.9541 (90.9s)
+TRAIN push_chair seed=0:  10%|██████▍                                                         | 1999/20000 [15:10<2:16:32,  2.20it/s][push_chair][seed=0][  2000] decoder=0.0000 reward=1.0440 cont=0.0013 kl=7.1349 (90.9s)
+TRAIN push_chair seed=0:  11%|███████                                                         | 2199/20000 [16:41<2:15:29,  2.19it/s][push_chair][seed=0][  2200] decoder=0.0000 reward=0.9941 cont=0.0350 kl=7.6814 (91.2s)
+TRAIN push_chair seed=0:  12%|███████▋                                                        | 2399/20000 [18:12<2:13:35,  2.20it/s][push_chair][seed=0][  2400] decoder=0.0000 reward=1.1194 cont=0.0005 kl=5.3394 (91.1s)
+TRAIN push_chair seed=0:  13%|████████▎                                                       | 2599/20000 [19:43<2:11:41,  2.20it/s][push_chair][seed=0][  2600] decoder=0.0000 reward=1.0222 cont=0.0008 kl=5.7298 (91.1s)
+TRAIN push_chair seed=0:  14%|████████▉                                                       | 2799/20000 [21:14<2:10:36,  2.20it/s][push_chair][seed=0][  2800] decoder=0.0000 reward=0.9522 cont=0.0004 kl=4.0181 (90.7s)
+TRAIN push_chair seed=0:  15%|█████████▌                                                      | 2999/20000 [22:45<2:09:04,  2.20it/s][push_chair][seed=0][  3000] decoder=0.0000 reward=1.0365 cont=0.0010 kl=6.1428 (90.9s)
+TRAIN push_chair seed=0:  16%|██████████▏                                                     | 3199/20000 [30:29<2:24:23,  1.94it/s][push_chair][seed=0][  3200] decoder=0.0000 reward=1.0777 cont=0.0002 kl=4.1697 (464.1s)
+TRAIN push_chair seed=0:  17%|██████████▉                                                     | 3399/20000 [32:00<2:04:45,  2.22it/s][push_chair][seed=0][  3400] decoder=0.0000 reward=1.0616 cont=0.0002 kl=5.3530 (90.7s)
+TRAIN push_chair seed=0:  18%|███████████▌                                                    | 3599/20000 [33:29<2:00:55,  2.26it/s][push_chair][seed=0][  3600] decoder=0.0000 reward=1.0685 cont=0.0002 kl=4.1707 (88.9s)
+TRAIN push_chair seed=0:  19%|████████████▏                                                   | 3799/20000 [34:58<1:54:43,  2.35it/s][push_chair][seed=0][  3800] decoder=0.0000 reward=1.1524 cont=0.0001 kl=3.9973 (89.2s)
+TRAIN push_chair seed=0:  19%|████████████▍                                                   | 3873/20000 [35:31<2:02:28,  2.19it/s]TRAIN push_chair seed=0:  19%|████████████▍    TRAIN push_chair seed=0:  20%|████████████▊                                          TRAIN push_chair seed=0:  20%|████████████▌                                                  | 3999/20000 [36:43<22:07:50,  4.98s/it][push_chair][seed=0][  4000] decoder=0.0000 reward=1.1996 cont=0.0004 kl=4.5557 (105.4s)
+
+TRAIN push_chair seed=0:  19%|████████████▏                                                   | 3799/20000 [34:58<1:54:43,  2.35it/s][push_chair][seed=0][  3800] decoder=0.0000 reward=1.1524 cont=0.0001 kl=3.9973 (89.2s)
+
+TRAIN push_chair seed=0:  19%|████████████▏                                                   | 3800/20000 [34:58<1:54:45,  2.35it/s]
+TRAIN push_chair seed=0:  19%|████████████▏                                                   | 3801/20000 [34:59<1:55:59,  2.33it/s]
+TRAIN push_chair seed=0:  19%|████████████▏                                                   | 3802/20000 [34:59<1:57:00,  2.31it/s]
+TRAIN push_chair seed=0:  19%|████████████▏                                                   | 3803/20000 [35:00<1:57:42,  2.29it/s]
+TRAIN push_chair seed=0:  19%|████████████▏                                                   | 3804/20000 [35:00<1:58:20,  2.28it/s]
+TRAIN push_chair seed=0:  19%|████████████▏                                                   | 3805/20000 [35:00<1:58:44,  2.27it/s]
+TRAIN push_chair seed=0:  19%|████████████▏                                                   | 3806/20000 [35:01<1:58:40,  2.27it/s]
+TRAIN push_chair seed=0:  19%|████████████▏                                                   | 3807/20000 [35:01<1:59:00,  2.27it/s]
+TRAIN push_chair seed=0:  19%|████████████▏                                                   | 3808/20000 [35:02<1:59:07,  2.27it/s]
+TRAIN push_chair seed=0:  19%|████████████▏                                                   | 3809/20000 [35:02<1:59:03,  2.27it/s]
+TRAIN push_chair seed=0:  19%|████████████▏                                                   | 3810/20000 [35:03<1:57:51,  2.29it/s]
+TRAIN push_chair seed=0:  19%|████████████▏                                                   | 3811/20000 [35:03<1:56:12,  2.32it/s]
+TRAIN push_chair seed=0:  19%|████████████▏                                                   | 3812/20000 [35:03<1:55:00,  2.35it/s]
+TRAIN push_chair seed=0:  19%|████████████▏                                                   | 3813/20000 [35:04<1:56:26,  2.32it/s]
+TRAIN push_chair seed=0:  19%|████████████▏                                                   | 3814/20000 [35:04<1:55:11,  2.34it/s]
+TRAIN push_chair seed=0:  19%|████████████▏                                                   | 3815/20000 [35:05<1:54:17,  2.36it/s]
+TRAIN push_chair seed=0:  19%|████████████▏                                                   | 3816/20000 [35:05<1:53:49,  2.37it/s]
+TRAIN push_chair seed=0:  19%|████████████▏                                                   | 3817/20000 [35:06<1:53:29,  2.38it/s]
+TRAIN push_chair seed=0:  19%|████████████▏                                                   | 3818/20000 [35:06<1:53:04,  2.39it/s]
+TRAIN push_chair seed=0:  19%|████████████▏                                                   | 3819/20000 [35:06<1:52:47,  2.39it/s]
+TRAIN push_chair seed=0:  19%|████████████▏                                                   | 3820/20000 [35:07<1:53:18,  2.38it/s]
+TRAIN push_chair seed=0:  19%|████████████▏                                                   | 3821/20000 [35:07<1:56:03,  2.32it/s]
+TRAIN push_chair seed=0:  19%|████████████▏                                                   | 3822/20000 [35:08<1:58:04,  2.28it/s]
+TRAIN push_chair seed=0:  19%|████████████▏                                                   | 3823/20000 [35:08<2:00:26,  2.24it/s]
+TRAIN push_chair seed=0:  19%|████████████▏                                                   | 3824/20000 [35:09<2:01:10,  2.22it/s]
+TRAIN push_chair seed=0:  19%|████████████▏                                                   | 3825/20000 [35:09<2:01:39,  2.22it/s]
+TRAIN push_chair seed=0:  19%|████████████▏                                                   | 3826/20000 [35:10<2:02:04,  2.21it/s]
+TRAIN push_chair seed=0:  19%|████████████▏                                                   | 3827/20000 [35:10<2:02:08,  2.21it/s]
+TRAIN push_chair seed=0:  19%|████████████▏                                                   | 3828/20000 [35:10<2:02:20,  2.20it/s]
+TRAIN push_chair seed=0:  19%|████████████▎                                                   | 3829/20000 [35:11<2:02:19,  2.20it/s]
+TRAIN push_chair seed=0:  19%|████████████▎                                                   | 3830/20000 [35:11<2:02:24,  2.20it/s]
+TRAIN push_chair seed=0:  19%|████████████▎                                                   | 3831/20000 [35:12<2:02:14,  2.20it/s]
+TRAIN push_chair seed=0:  19%|████████████▎                                                   | 3832/20000 [35:12<2:02:12,  2.20it/s]
+TRAIN push_chair seed=0:  19%|████████████▎                                                   | 3833/20000 [35:13<2:02:19,  2.20it/s]
+TRAIN push_chair seed=0:  19%|████████████▎                                                   | 3834/20000 [35:13<2:02:30,  2.20it/s]
+TRAIN push_chair seed=0:  19%|████████████▎                                                   | 3835/20000 [35:14<2:02:22,  2.20it/s]
+TRAIN push_chair seed=0:  19%|████████████▎                                                   | 3836/20000 [35:14<2:02:27,  2.20it/s]
+TRAIN push_chair seed=0:  19%|████████████▎                                                   | 3837/20000 [35:15<2:01:58,  2.21it/s]
+TRAIN push_chair seed=0:  19%|████████████▎                                                   | 3838/20000 [35:15<2:02:00,  2.21it/s]
+TRAIN push_chair seed=0:  19%|████████████▎                                                   | 3839/20000 [35:15<2:02:01,  2.21it/s]
+TRAIN push_chair seed=0:  19%|████████████▎                                                   | 3840/20000 [35:16<2:01:56,  2.21it/s]
+TRAIN push_chair seed=0:  19%|████████████▎                                                   | 3841/20000 [35:16<2:01:52,  2.21it/s]
+TRAIN push_chair seed=0:  19%|████████████▎                                                   | 3842/20000 [35:17<2:02:29,  2.20it/s]
+TRAIN push_chair seed=0:  19%|████████████▎                                                   | 3843/20000 [35:17<2:02:46,  2.19it/s]
+TRAIN push_chair seed=0:  19%|████████████▎                                                   | 3844/20000 [35:18<2:03:05,  2.19it/s]
+TRAIN push_chair seed=0:  19%|████████████▎                                                   | 3845/20000 [35:18<2:03:12,  2.19it/s]
+TRAIN push_chair seed=0:  19%|████████████▎                                                   | 3846/20000 [35:19<2:03:54,  2.17it/s]
+TRAIN push_chair seed=0:  19%|████████████▎                                                   | 3847/20000 [35:19<2:03:56,  2.17it/s]
+TRAIN push_chair seed=0:  19%|████████████▎                                                   | 3848/20000 [35:20<2:03:42,  2.18it/s]
+TRAIN push_chair seed=0:  19%|████████████▎                                                   | 3849/20000 [35:20<2:03:11,  2.19it/s]
+TRAIN push_chair seed=0:  19%|████████████▎                                                   | 3850/20000 [35:20<2:02:46,  2.19it/s]
+TRAIN push_chair seed=0:  19%|████████████▎                                                   | 3851/20000 [35:21<2:02:34,  2.20it/s]
+TRAIN push_chair seed=0:  19%|████████████▎                                                   | 3852/20000 [35:21<2:02:29,  2.20it/s]
+TRAIN push_chair seed=0:  19%|████████████▎                                                   | 3853/20000 [35:22<2:02:18,  2.20it/s]
+TRAIN push_chair seed=0:  19%|████████████▎                                                   | 3854/20000 [35:22<2:02:15,  2.20it/s]
+TRAIN push_chair seed=0:  19%|████████████▎                                                   | 3855/20000 [35:23<2:02:26,  2.20it/s]
+TRAIN push_chair seed=0:  19%|████████████▎                                                   | 3856/20000 [35:23<2:02:36,  2.19it/s]
+TRAIN push_chair seed=0:  19%|████████████▎                                                   | 3857/20000 [35:24<2:02:54,  2.19it/s]
+TRAIN push_chair seed=0:  19%|████████████▎                                                   | 3858/20000 [35:24<2:02:45,  2.19it/s]
+TRAIN push_chair seed=0:  19%|████████████▎                                                   | 3859/20000 [35:25<2:02:31,  2.20it/s]
+TRAIN push_chair seed=0:  19%|████████████▎                                                   | 3860/20000 [35:25<2:02:21,  2.20it/s]
+TRAIN push_chair seed=0:  19%|████████████▎                                                   | 3861/20000 [35:25<2:02:25,  2.20it/s]
+TRAIN push_chair seed=0:  19%|████████████▎                                                   | 3862/20000 [35:26<2:02:18,  2.20it/s]
+TRAIN push_chair seed=0:  19%|████████████▎                                                   | 3863/20000 [35:26<2:02:19,  2.20it/s]
+TRAIN push_chair seed=0:  19%|████████████▎                                                   | 3864/20000 [35:27<2:02:12,  2.20it/s]
+TRAIN push_chair seed=0:  19%|████████████▎                                                   | 3865/20000 [35:27<2:02:20,  2.20it/s]
+TRAIN push_chair seed=0:  19%|████████████▎                                                   | 3866/20000 [35:28<2:02:05,  2.20it/s]
+TRAIN push_chair seed=0:  19%|████████████▎                                                   | 3867/20000 [35:28<2:02:28,  2.20it/s]
+TRAIN push_chair seed=0:  19%|████████████▍                                                   | 3868/20000 [35:29<2:02:19,  2.20it/s]
+TRAIN push_chair seed=0:  19%|████████████▍                                                   | 3869/20000 [35:29<2:02:29,  2.19it/s]
+TRAIN push_chair seed=0:  19%|████████████▍                                                   | 3870/20000 [35:30<2:02:24,  2.20it/s]
+TRAIN push_chair seed=0:  19%|████████████▍                                                   | 3871/20000 [35:30<2:02:11,  2.20it/s]
+TRAIN push_chair seed=0:  19%|████████████▍                                                   | 3872/20000 [35:30<2:02:13,  2.20it/s]
+TRAIN push_chair seed=0:  19%|████████████▍                                                   | 3873/20000 [35:31<2:02:28,  2.19it/s]^[[A
+TRAIN push_chair seed=0:  19%|████████████▍                                                   | 3874/20000 [35:31<2:02:17,  2.20it/s]
+TRAIN push_chair seed=0:  19%|████████████▍                                                   | 3875/20000 [35:32<2:02:02,  2.20it/s]
+TRAIN push_chair seed=0:  19%|████████████▍                                                   | 3876/20000 [35:32<2:02:13,  2.20it/s]
+TRAIN push_chair seed=0:  19%|████████████▍                                                   | 3877/20000 [35:33<2:02:07,  2.20it/s]
+TRAIN push_chair seed=0:  19%|████████████▍                                                   | 3878/20000 [35:33<2:02:08,  2.20it/s]
+TRAIN push_chair seed=0:  19%|████████████▍                                                   | 3879/20000 [35:34<2:02:02,  2.20it/s]
+TRAIN push_chair seed=0:  19%|████████████▍                                                   | 3880/20000 [35:34<2:02:12,  2.20it/s]
+TRAIN push_chair seed=0:  19%|████████████▍                                                   | 3881/20000 [35:35<2:02:08,  2.20it/s]
+TRAIN push_chair seed=0:  19%|████████████▍                                                   | 3882/20000 [35:35<2:02:10,  2.20it/s]
+TRAIN push_chair seed=0:  19%|████████████▍                                                   | 3883/20000 [35:35<2:02:03,  2.20it/s]
+TRAIN push_chair seed=0:  19%|████████████▍                                                   | 3884/20000 [35:36<2:02:22,  2.19it/s]
+TRAIN push_chair seed=0:  19%|████████████▍                                                   | 3885/20000 [35:36<2:02:31,  2.19it/s]
+TRAIN push_chair seed=0:  19%|████████████▍                                                   | 3886/20000 [35:37<2:02:33,  2.19it/s]
+TRAIN push_chair seed=0:  19%|████████████▍                                                   | 3887/20000 [35:37<2:02:19,  2.20it/s]
+TRAIN push_chair seed=0:  19%|████████████▍                                                   | 3888/20000 [35:38<2:02:09,  2.20it/s]
+TRAIN push_chair seed=0:  19%|████████████▍                                                   | 3889/20000 [35:38<2:02:03,  2.20it/s]
+TRAIN push_chair seed=0:  19%|████████████▍                                                   | 3890/20000 [35:39<2:01:53,  2.20it/s]
+TRAIN push_chair seed=0:  19%|████████████▍                                                   | 3891/20000 [35:39<2:01:50,  2.20it/s]
+TRAIN push_chair seed=0:  19%|████████████▍                                                   | 3892/20000 [35:40<2:01:57,  2.20it/s]
+TRAIN push_chair seed=0:  19%|████████████▍                                                   | 3893/20000 [35:40<2:01:50,  2.20it/s]
+TRAIN push_chair seed=0:  19%|████████████▍                                                   | 3894/20000 [35:40<2:01:55,  2.20it/s]
+TRAIN push_chair seed=0:  19%|████████████▍                                                   | 3895/20000 [35:41<2:01:57,  2.20it/s]
+TRAIN push_chair seed=0:  19%|████████████▍                                                   | 3896/20000 [35:41<2:01:56,  2.20it/s]
+TRAIN push_chair seed=0:  19%|████████████▍                                                   | 3897/20000 [35:42<2:02:18,  2.19it/s]
+TRAIN push_chair seed=0:  19%|████████████▍                                                   | 3898/20000 [35:42<2:02:10,  2.20it/s]
+TRAIN push_chair seed=0:  19%|████████████▍                                                   | 3899/20000 [35:43<2:02:24,  2.19it/s]
+TRAIN push_chair seed=0:  20%|████████████▍                                                   | 3900/20000 [35:43<2:02:17,  2.19it/s]
+TRAIN push_chair seed=0:  20%|████████████▍                                                   | 3901/20000 [35:44<2:02:14,  2.19it/s]
+TRAIN push_chair seed=0:  20%|████████████▍                                                   | 3902/20000 [35:44<2:02:14,  2.19it/s]
+TRAIN push_chair seed=0:  20%|████████████▍                                                   | 3903/20000 [35:45<2:02:21,  2.19it/s]
+TRAIN push_chair seed=0:  20%|████████████▍                                                   | 3904/20000 [35:45<2:04:40,  2.15it/s]
+TRAIN push_chair seed=0:  20%|████████████▍                                                   | 3905/20000 [35:46<2:04:16,  2.16it/s]
+TRAIN push_chair seed=0:  20%|████████████▍                                                   | 3906/20000 [35:46<2:04:07,  2.16it/s]
+TRAIN push_chair seed=0:  20%|████████████▌                                                   | 3907/20000 [35:46<2:03:50,  2.17it/s]
+TRAIN push_chair seed=0:  20%|████████████▌                                                   | 3908/20000 [35:47<2:03:40,  2.17it/s]
+TRAIN push_chair seed=0:  20%|████████████▌                                                   | 3909/20000 [35:47<2:03:29,  2.17it/s]
+TRAIN push_chair seed=0:  20%|████████████▌                                                   | 3910/20000 [35:48<2:03:05,  2.18it/s]
+TRAIN push_chair seed=0:  20%|████████████▌                                                   | 3911/20000 [35:48<2:02:37,  2.19it/s]
+TRAIN push_chair seed=0:  20%|████████████▌                                                   | 3912/20000 [35:49<2:02:24,  2.19it/s]
+TRAIN push_chair seed=0:  20%|████████████▌                                                   | 3913/20000 [35:49<2:02:46,  2.18it/s]
+TRAIN push_chair seed=0:  20%|████████████▌                                                   | 3914/20000 [35:50<2:02:48,  2.18it/s]
+TRAIN push_chair seed=0:  20%|████████████▌                                                   | 3915/20000 [35:50<2:02:55,  2.18it/s]
+TRAIN push_chair seed=0:  20%|████████████▌                                                   | 3916/20000 [35:51<2:02:45,  2.18it/s]
+TRAIN push_chair seed=0:  20%|████████████▌                                                   | 3917/20000 [35:51<2:02:44,  2.18it/s]
+TRAIN push_chair seed=0:  20%|████████████▌                                                   | 3918/20000 [35:51<2:02:47,  2.18it/s]
+TRAIN push_chair seed=0:  20%|████████████▌                                                   | 3919/20000 [35:52<2:02:53,  2.18it/s]
+TRAIN push_chair seed=0:  20%|████████████▌                                                   | 3920/20000 [35:52<2:03:01,  2.18it/s]
+TRAIN push_chair seed=0:  20%|████████████▌                                                   | 3921/20000 [35:53<2:02:54,  2.18it/s]
+TRAIN push_chair seed=0:  20%|████████████▌                                                   | 3922/20000 [35:53<2:02:46,  2.18it/s]
+TRAIN push_chair seed=0:  20%|████████████▌                                                   | 3923/20000 [35:54<2:02:32,  2.19it/s]
+TRAIN push_chair seed=0:  20%|████████████▌                                                   | 3924/20000 [35:54<2:02:33,  2.19it/s]
+TRAIN push_chair seed=0:  20%|████████████▌                                                   | 3925/20000 [35:55<2:02:37,  2.18it/s]
+TRAIN push_chair seed=0:  20%|████████████▌                                                   | 3926/20000 [35:55<2:02:51,  2.18it/s]
+TRAIN push_chair seed=0:  20%|████████████▌                                                   | 3927/20000 [35:56<2:02:45,  2.18it/s]
+TRAIN push_chair seed=0:  20%|████████████▌                                                   | 3928/20000 [35:56<2:03:15,  2.17it/s]
+TRAIN push_chair seed=0:  20%|████████████▌                                                   | 3929/20000 [35:57<2:02:58,  2.18it/s]
+TRAIN push_chair seed=0:  20%|████████████▌                                                   | 3930/20000 [35:57<2:02:54,  2.18it/s]
+TRAIN push_chair seed=0:  20%|████████████▌                                                   | 3931/20000 [35:57<2:02:48,  2.18it/s]
+TRAIN push_chair seed=0:  20%|████████████▌                                                   | 3932/20000 [35:58<2:03:05,  2.18it/s]
+TRAIN push_chair seed=0:  20%|████████████▌                                                   | 3933/20000 [35:58<2:02:57,  2.18it/s]
+TRAIN push_chair seed=0:  20%|████████████▌                                                   | 3934/20000 [35:59<2:02:46,  2.18it/s]
+TRAIN push_chair seed=0:  20%|████████████▌                                                   | 3935/20000 [35:59<2:02:42,  2.18it/s]
+TRAIN push_chair seed=0:  20%|████████████▌                                                   | 3936/20000 [36:00<2:02:44,  2.18it/s]
+TRAIN push_chair seed=0:  20%|████████████▌                                                   | 3937/20000 [36:00<2:02:39,  2.18it/s]
+TRAIN push_chair seed=0:  20%|████████████▌                                                   | 3938/20000 [36:01<2:02:36,  2.18it/s]
+TRAIN push_chair seed=0:  20%|████████████▌                                                   | 3939/20000 [36:01<2:02:30,  2.19it/s]
+TRAIN push_chair seed=0:  20%|████████████▌                                                   | 3940/20000 [36:02<2:02:32,  2.18it/s]
+TRAIN push_chair seed=0:  20%|████████████▌                                                   | 3941/20000 [36:02<2:02:27,  2.19it/s]
+TRAIN push_chair seed=0:  20%|████████████▌                                                   | 3942/20000 [36:02<2:02:18,  2.19it/s]
+TRAIN push_chair seed=0:  20%|████████████▌                                                   | 3943/20000 [36:03<2:02:13,  2.19it/s]
+TRAIN push_chair seed=0:  20%|████████████▌                                                   | 3944/20000 [36:03<2:02:01,  2.19it/s]
+TRAIN push_chair seed=0:  20%|████████████▌                                                   | 3945/20000 [36:04<2:02:02,  2.19it/s]
+TRAIN push_chair seed=0:  20%|████████████▋                                                   | 3946/20000 [36:04<2:01:57,  2.19it/s]
+TRAIN push_chair seed=0:  20%|████████████▋                                                   | 3947/20000 [36:05<2:01:57,  2.19it/s]
+TRAIN push_chair seed=0:  20%|████████████▋                                                   | 3948/20000 [36:05<2:02:09,  2.19it/s]
+TRAIN push_chair seed=0:  20%|████████████▋                                                   | 3949/20000 [36:06<2:02:06,  2.19it/s]
+TRAIN push_chair seed=0:  20%|████████████▋                                                   | 3950/20000 [36:06<2:02:00,  2.19it/s]
+TRAIN push_chair seed=0:  20%|████████████▋                                                   | 3951/20000 [36:07<2:01:50,  2.20it/s]
+TRAIN push_chair seed=0:  20%|████████████▋                                                   | 3952/20000 [36:07<2:01:58,  2.19it/s]
+TRAIN push_chair seed=0:  20%|████████████▋                                                   | 3953/20000 [36:07<2:01:53,  2.19it/s]
+TRAIN push_chair seed=0:  20%|████████████▋                                                   | 3954/20000 [36:08<2:01:46,  2.20it/s]
+TRAIN push_chair seed=0:  20%|████████████▋                                                   | 3955/20000 [36:08<2:01:42,  2.20it/s]
+TRAIN push_chair seed=0:  20%|████████████▋                                                   | 3956/20000 [36:09<2:01:46,  2.20it/s]
+TRAIN push_chair seed=0:  20%|████████████▋                                                   | 3957/20000 [36:09<2:01:49,  2.19it/s]
+TRAIN push_chair seed=0:  20%|████████████▋                                                   | 3958/20000 [36:10<2:01:40,  2.20it/s]
+TRAIN push_chair seed=0:  20%|████████████▋                                                   | 3959/20000 [36:10<2:01:39,  2.20it/s]
+TRAIN push_chair seed=0:  20%|████████████▋                                                   | 3960/20000 [36:11<2:01:43,  2.20it/s]
+TRAIN push_chair seed=0:  20%|████████████▋                                                   | 3961/20000 [36:11<2:01:51,  2.19it/s]
+TRAIN push_chair seed=0:  20%|████████████▋                                                   | 3962/20000 [36:12<2:01:54,  2.19it/s]
+TRAIN push_chair seed=0:  20%|████████████▋                                                   | 3963/20000 [36:12<2:01:41,  2.20it/s]
+TRAIN push_chair seed=0:  20%|████████████▋                                                   | 3964/20000 [36:13<2:01:44,  2.20it/s]
+TRAIN push_chair seed=0:  20%|████████████▋                                                   | 3965/20000 [36:13<2:01:40,  2.20it/s]
+TRAIN push_chair seed=0:  20%|████████████▋                                                   | 3966/20000 [36:13<2:01:44,  2.19it/s]
+TRAIN push_chair seed=0:  20%|████████████▋                                                   | 3967/20000 [36:14<2:01:34,  2.20it/s]
+TRAIN push_chair seed=0:  20%|████████████▋                                                   | 3968/20000 [36:14<2:01:26,  2.20it/s]
+TRAIN push_chair seed=0:  20%|████████████▋                                                   | 3969/20000 [36:15<2:01:28,  2.20it/s]
+TRAIN push_chair seed=0:  20%|████████████▋                                                   | 3970/20000 [36:15<2:01:30,  2.20it/s]
+TRAIN push_chair seed=0:  20%|████████████▋                                                   | 3971/20000 [36:16<2:01:33,  2.20it/s]
+TRAIN push_chair seed=0:  20%|████████████▋                                                   | 3972/20000 [36:16<2:01:42,  2.19it/s]
+TRAIN push_chair seed=0:  20%|████████████▋                                                   | 3973/20000 [36:17<2:01:39,  2.20it/s]
+TRAIN push_chair seed=0:  20%|████████████▋                                                   | 3974/20000 [36:17<2:01:41,  2.19it/s]
+TRAIN push_chair seed=0:  20%|████████████▋                                                   | 3975/20000 [36:18<2:01:40,  2.20it/s]
+TRAIN push_chair seed=0:  20%|████████████▋                                                   | 3976/20000 [36:18<2:02:02,  2.19it/s]
+TRAIN push_chair seed=0:  20%|████████████▋                                                   | 3977/20000 [36:18<2:01:49,  2.19it/s]
+TRAIN push_chair seed=0:  20%|████████████▋                                                   | 3978/20000 [36:19<2:01:47,  2.19it/s]
+TRAIN push_chair seed=0:  20%|████████████▋                                                   | 3979/20000 [36:19<2:01:41,  2.19it/s]
+TRAIN push_chair seed=0:  20%|████████████▋                                                   | 3980/20000 [36:20<2:01:41,  2.19it/s]
+TRAIN push_chair seed=0:  20%|████████████▋                                                   | 3981/20000 [36:20<2:01:43,  2.19it/s]
+TRAIN push_chair seed=0:  20%|████████████▋                                                   | 3982/20000 [36:21<2:01:49,  2.19it/s]
+TRAIN push_chair seed=0:  20%|████████████▋                                                   | 3983/20000 [36:21<2:02:56,  2.17it/s]
+TRAIN push_chair seed=0:  20%|████████████▋                                                   | 3984/20000 [36:22<2:02:40,  2.18it/s]
+TRAIN push_chair seed=0:  20%|████████████▊                                                   | 3985/20000 [36:22<2:02:22,  2.18it/s]
+TRAIN push_chair seed=0:  20%|████████████▊                                                   | 3986/20000 [36:23<1:59:02,  2.24it/s]
+TRAIN push_chair seed=0:  20%|████████████▊                                                   | 3987/20000 [36:23<1:57:27,  2.27it/s]
+TRAIN push_chair seed=0:  20%|████████████▊                                                   | 3988/20000 [36:23<1:55:31,  2.31it/s]
+TRAIN push_chair seed=0:  20%|████████████▊                                                   | 3989/20000 [36:24<1:54:06,  2.34it/s]
+TRAIN push_chair seed=0:  20%|████████████▊                                                   | 3990/20000 [36:24<1:53:17,  2.36it/s]
+TRAIN push_chair seed=0:  20%|████████████▊                                                   | 3991/20000 [36:25<1:52:37,  2.37it/s]
+TRAIN push_chair seed=0:  20%|████████████▊                                                   | 3992/20000 [36:25<1:52:07,  2.38it/s]
+TRAIN push_chair seed=0:  20%|████████████▊                                                   | 3993/20000 [36:25<1:51:44,  2.39it/s]
+TRAIN push_chair seed=0:  20%|████████████▊                                                   | 3994/20000 [36:26<1:51:17,  2.40it/s]
+TRAIN push_chair seed=0:  20%|████████████▊                                                   | 3995/20000 [36:26<1:51:03,  2.40it/s]
+TRAIN push_chair seed=0:  20%|████████████▊                                                   | 3996/20000 [36:27<1:50:59,  2.40it/s]
+TRAIN push_chair seed=0:  20%|████████████▊                                                   | 3997/20000 [36:27<1:50:59,  2.40it/s]
+TRAIN push_chair seed=0:  20%|████████████▊                                                   | 3998/20000 [36:28<1:50:52,  2.41it/s]
+TRAIN push_chair seed=0:  20%|████████████▌                                                  | 3999/20000 [36:43<22:07:50,  4.98s/it][push_chair][seed=0][  4000] decoder=0.0000 reward=1.1996 cont=0.0004 kl=4.5557 (105.4s)
+
+TRAIN push_chair seed=0:  20%|████████████▌                                                  | 4000/20000 [36:44<16:06:00,  3.62s/it]
+TRAIN push_chair seed=0:  20%|████████████▌                                                  | 4001/20000 [36:44<11:52:56,  2.67s/it]
+TRAIN push_chair seed=0:  20%|████████████▊                                                   | 4002/20000 [36:45<8:55:34,  2.01s/it]
+TRAIN push_chair seed=0:  20%|████████████▊                                                   | 4003/20000 [36:45<6:51:13,  1.54s/it]
+TRAIN push_chair seed=0:  20%|████████████▊                                                   | 4004/20000 [36:45<5:24:14,  1.22s/it]
+TRAIN push_chair seed=0:  20%|████████████▊                                                   | 4005/20000 [36:46<4:23:23,  1.01it/s]
+TRAIN push_chair seed=0:  20%|████████████▊                                                   | 4006/20000 [36:46<3:40:45,  1.21it/s]
+TRAIN push_chair seed=0:  20%|████████████▊                                                   | 4007/20000 [36:47<3:11:05,  1.39it/s]
+TRAIN push_chair seed=0:  20%|████████████▊                                                   | 4008/20000 [36:47<2:50:39,  1.56it/s]
+TRAIN push_chair seed=0:  20%|████████████▊                                                   | 4009/20000 [36:48<2:36:06,  1.71it/s]
+TRAIN push_chair seed=0:  20%|████████████▊                                                   | 4010/20000 [36:48<2:26:03,  1.82it/s]
+TRAIN push_chair seed=0:  20%|████████████▊                                                   | 4011/20000 [36:49<2:18:33,  1.92it/s]
+TRAIN push_chair seed=0:  20%|████████████▊                                                   | 4012/20000 [36:49<2:13:22,  2.00it/s]
+TRAIN push_chair seed=0:  20%|████████████▊                                                   | 4013/20000 [36:50<2:09:38,  2.06it/s]
+TRAIN push_chair seed=0:  20%|████████████▊                                                   | 4014/20000 [36:50<2:07:09,  2.10it/s]
+TRAIN push_chair seed=0:  20%|████████████▊                                                   | 4015/20000 [36:50<2:05:16,  2.13it/s]^[[A^[[A^[[A^[[A
+TRAIN push_chair seed=0:  20%|████████████▊                                                   | 4016/20000 [36:51<2:04:18,  2.14it/s]
+TRAIN push_chair seed=0:  20%|████████████▊                                                   | 4017/20000 [36:51<2:03:17,  2.16it/s]
+TRAIN push_chair seed=0:  20%|████████████▊                                                   | 4018/20000 [36:52<2:02:55,  2.17it/s]
+TRAIN push_chair seed=0:  20%|████████████▊                                                   | 4019/20000 [36:52<2:02:58,  2.17it/s]
+TRAIN push_chair seed=0:  20%|████████████▊                                                   | 4020/20000 [36:53<2:02:36,  2.17it/s]
+TRAIN push_chair seed=0:  20%|████████████▊                                                   | 4021/20000 [36:53<2:02:25,  2.18it/s]
