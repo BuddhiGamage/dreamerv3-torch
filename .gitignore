@@ -1,5 +1,5 @@
 #
-run*
+# run*
 logdir*
 vis_*
 result*
@@ -136,3 +136,5 @@ dmypy.json
 
 # VScode
 .vscode/*
+
+screenlog.0
