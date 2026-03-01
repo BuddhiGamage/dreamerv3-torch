@@ -137,4 +137,4 @@ dmypy.json
 # VScode
 .vscode/*
 
-screenlog.0
+screenlog*
