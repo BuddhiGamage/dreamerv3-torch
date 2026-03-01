@@ -1,0 +1,111 @@
+{
+  "task": "stacking",
+  "thr_task": 635.0074179077693,
+  "alpha": 0.1,
+  "bins_used": 10,
+  "bins_note": "auto(min=4,max=10,min_pts_per_bin=20)",
+  "calib_success_source": "calib_only",
+  "calib_scores_stats": {
+    "mean": 401.5925355080078,
+    "std": 143.54390039339702,
+    "min": 275.2062178730727,
+    "max": 962.5857963837954,
+    "n": 50
+  },
+  "bin_counts_success_pool": [
+    291,
+    270,
+    275,
+    269,
+    264,
+    279,
+    273,
+    271,
+    274,
+    294
+  ],
+  "bin_counts_est_calib_only": [
+    291,
+    270,
+    275,
+    269,
+    264,
+    279,
+    273,
+    271,
+    274,
+    294
+  ],
+  "plotted": [
+    {
+      "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/stacking/traces/stacking_succ_485.npz",
+      "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/stacking/plots/stacking_succ_485.png",
+      "i": 485,
+      "y": 0,
+      "dt": null
+    },
+    {
+      "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/stacking/traces/stacking_succ_486.npz",
+      "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/stacking/plots/stacking_succ_486.png",
+      "i": 486,
+      "y": 0,
+      "dt": null
+    },
+    {
+      "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/stacking/traces/stacking_succ_487.npz",
+      "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/stacking/plots/stacking_succ_487.png",
+      "i": 487,
+      "y": 0,
+      "dt": null
+    },
+    {
+      "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/stacking/traces/stacking_succ_488.npz",
+      "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/stacking/plots/stacking_succ_488.png",
+      "i": 488,
+      "y": 0,
+      "dt": null
+    },
+    {
+      "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/stacking/traces/stacking_succ_489.npz",
+      "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/stacking/plots/stacking_succ_489.png",
+      "i": 489,
+      "y": 0,
+      "dt": null
+    },
+    {
+      "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/stacking/traces/stacking_fail_0.npz",
+      "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/stacking/plots/stacking_fail_0.png",
+      "i": 0,
+      "y": 1,
+      "dt": null
+    },
+    {
+      "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/stacking/traces/stacking_fail_1.npz",
+      "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/stacking/plots/stacking_fail_1.png",
+      "i": 1,
+      "y": 1,
+      "dt": 9
+    },
+    {
+      "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/stacking/traces/stacking_fail_2.npz",
+      "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/stacking/plots/stacking_fail_2.png",
+      "i": 2,
+      "y": 1,
+      "dt": null
+    },
+    {
+      "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/stacking/traces/stacking_fail_3.npz",
+      "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/stacking/plots/stacking_fail_3.png",
+      "i": 3,
+      "y": 1,
+      "dt": 9
+    },
+    {
+      "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/stacking/traces/stacking_fail_4.npz",
+      "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/stacking/plots/stacking_fail_4.png",
+      "i": 4,
+      "y": 1,
+      "dt": 8
+    }
+  ]
+}

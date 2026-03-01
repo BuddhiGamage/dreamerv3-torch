@@ -1,0 +1,111 @@
+{
+  "task": "push_t",
+  "thr_task": 579.4316535856155,
+  "alpha": 0.1,
+  "bins_used": 10,
+  "bins_note": "auto(min=4,max=10,min_pts_per_bin=20)",
+  "calib_success_source": "calib_only",
+  "calib_scores_stats": {
+    "mean": 337.1868851277908,
+    "std": 209.0257670925159,
+    "min": 168.06683813145966,
+    "max": 1054.5580073765555,
+    "n": 21
+  },
+  "bin_counts_success_pool": [
+    44,
+    31,
+    31,
+    36,
+    28,
+    35,
+    38,
+    29,
+    33,
+    45
+  ],
+  "bin_counts_est_calib_only": [
+    44,
+    31,
+    31,
+    36,
+    28,
+    35,
+    38,
+    29,
+    33,
+    45
+  ],
+  "plotted": [
+    {
+      "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/push_t/traces/push_t_succ_198.npz",
+      "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/push_t/plots/push_t_succ_198.png",
+      "i": 198,
+      "y": 0,
+      "dt": 3
+    },
+    {
+      "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/push_t/traces/push_t_succ_199.npz",
+      "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/push_t/plots/push_t_succ_199.png",
+      "i": 199,
+      "y": 0,
+      "dt": null
+    },
+    {
+      "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/push_t/traces/push_t_succ_200.npz",
+      "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/push_t/plots/push_t_succ_200.png",
+      "i": 200,
+      "y": 0,
+      "dt": null
+    },
+    {
+      "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/push_t/traces/push_t_succ_201.npz",
+      "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/push_t/plots/push_t_succ_201.png",
+      "i": 201,
+      "y": 0,
+      "dt": null
+    },
+    {
+      "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/push_t/traces/push_t_succ_202.npz",
+      "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/push_t/plots/push_t_succ_202.png",
+      "i": 202,
+      "y": 0,
+      "dt": null
+    },
+    {
+      "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/push_t/traces/push_t_fail_0.npz",
+      "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/push_t/plots/push_t_fail_0.png",
+      "i": 0,
+      "y": 1,
+      "dt": 3
+    },
+    {
+      "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/push_t/traces/push_t_fail_1.npz",
+      "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/push_t/plots/push_t_fail_1.png",
+      "i": 1,
+      "y": 1,
+      "dt": 3
+    },
+    {
+      "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/push_t/traces/push_t_fail_2.npz",
+      "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/push_t/plots/push_t_fail_2.png",
+      "i": 2,
+      "y": 1,
+      "dt": 3
+    },
+    {
+      "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/push_t/traces/push_t_fail_3.npz",
+      "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/push_t/plots/push_t_fail_3.png",
+      "i": 3,
+      "y": 1,
+      "dt": 3
+    },
+    {
+      "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/push_t/traces/push_t_fail_4.npz",
+      "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/push_t/plots/push_t_fail_4.png",
+      "i": 4,
+      "y": 1,
+      "dt": 3
+    }
+  ]
+}

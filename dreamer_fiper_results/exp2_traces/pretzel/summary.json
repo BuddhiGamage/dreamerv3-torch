@@ -1,0 +1,111 @@
+{
+  "task": "pretzel",
+  "thr_task": 459.09936809664794,
+  "alpha": 0.1,
+  "bins_used": 10,
+  "bins_note": "auto(min=4,max=10,min_pts_per_bin=20)",
+  "calib_success_source": "calib_only",
+  "calib_scores_stats": {
+    "mean": 369.80805208825967,
+    "std": 47.953747377582694,
+    "min": 307.56884833476835,
+    "max": 459.09936809664794,
+    "n": 10
+  },
+  "bin_counts_success_pool": [
+    56,
+    50,
+    50,
+    51,
+    50,
+    50,
+    51,
+    50,
+    50,
+    59
+  ],
+  "bin_counts_est_calib_only": [
+    56,
+    50,
+    50,
+    51,
+    50,
+    50,
+    51,
+    50,
+    50,
+    59
+  ],
+  "plotted": [
+    {
+      "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/pretzel/traces/pretzel_succ_1.npz",
+      "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/pretzel/plots/pretzel_succ_1.png",
+      "i": 1,
+      "y": 0,
+      "dt": null
+    },
+    {
+      "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/pretzel/traces/pretzel_succ_2.npz",
+      "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/pretzel/plots/pretzel_succ_2.png",
+      "i": 2,
+      "y": 0,
+      "dt": null
+    },
+    {
+      "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/pretzel/traces/pretzel_succ_3.npz",
+      "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/pretzel/plots/pretzel_succ_3.png",
+      "i": 3,
+      "y": 0,
+      "dt": 10
+    },
+    {
+      "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/pretzel/traces/pretzel_succ_6.npz",
+      "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/pretzel/plots/pretzel_succ_6.png",
+      "i": 6,
+      "y": 0,
+      "dt": null
+    },
+    {
+      "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/pretzel/traces/pretzel_succ_12.npz",
+      "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/pretzel/plots/pretzel_succ_12.png",
+      "i": 12,
+      "y": 0,
+      "dt": null
+    },
+    {
+      "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/pretzel/traces/pretzel_fail_0.npz",
+      "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/pretzel/plots/pretzel_fail_0.png",
+      "i": 0,
+      "y": 1,
+      "dt": 12
+    },
+    {
+      "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/pretzel/traces/pretzel_fail_4.npz",
+      "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/pretzel/plots/pretzel_fail_4.png",
+      "i": 4,
+      "y": 1,
+      "dt": 12
+    },
+    {
+      "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/pretzel/traces/pretzel_fail_5.npz",
+      "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/pretzel/plots/pretzel_fail_5.png",
+      "i": 5,
+      "y": 1,
+      "dt": 23
+    },
+    {
+      "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/pretzel/traces/pretzel_fail_7.npz",
+      "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/pretzel/plots/pretzel_fail_7.png",
+      "i": 7,
+      "y": 1,
+      "dt": 10
+    },
+    {
+      "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/pretzel/traces/pretzel_fail_8.npz",
+      "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/pretzel/plots/pretzel_fail_8.png",
+      "i": 8,
+      "y": 1,
+      "dt": 7
+    }
+  ]
+}

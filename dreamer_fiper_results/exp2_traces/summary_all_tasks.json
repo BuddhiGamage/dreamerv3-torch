@@ -1,0 +1,579 @@
+{
+  "config": {
+    "data_root": "/home/s447658/projects/dreamer_fiper_feats_all5",
+    "out_dir": "/home/s447658/projects/dreamer_fiper_results/exp2_traces",
+    "tasks": [
+      "pretzel",
+      "push_t",
+      "sorting",
+      "stacking",
+      "push_chair"
+    ],
+    "alpha": 0.1,
+    "bins": "auto",
+    "bins_min": 4,
+    "bins_max": 10,
+    "min_pts_per_bin": 20,
+    "var_floor": 0.0001,
+    "window_mode": "adaptive",
+    "window_fixed": 5,
+    "window_frac": 0.2,
+    "min_window": 5,
+    "score_agg": "topk_mean",
+    "topk": 7,
+    "persist_mode": "adaptive",
+    "persist_fixed": 3,
+    "persist_frac": 0.25,
+    "persist_max": 8,
+    "calib_score_mode": "topk_mean",
+    "calib_success_source": "calib_only",
+    "k_succ": 5,
+    "k_fail": 5,
+    "debug": 1
+  },
+  "tasks": {
+    "pretzel": {
+      "task": "pretzel",
+      "thr_task": 459.09936809664794,
+      "alpha": 0.1,
+      "bins_used": 10,
+      "bins_note": "auto(min=4,max=10,min_pts_per_bin=20)",
+      "calib_success_source": "calib_only",
+      "calib_scores_stats": {
+        "mean": 369.80805208825967,
+        "std": 47.953747377582694,
+        "min": 307.56884833476835,
+        "max": 459.09936809664794,
+        "n": 10
+      },
+      "bin_counts_success_pool": [
+        56,
+        50,
+        50,
+        51,
+        50,
+        50,
+        51,
+        50,
+        50,
+        59
+      ],
+      "bin_counts_est_calib_only": [
+        56,
+        50,
+        50,
+        51,
+        50,
+        50,
+        51,
+        50,
+        50,
+        59
+      ],
+      "plotted": [
+        {
+          "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/pretzel/traces/pretzel_succ_1.npz",
+          "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/pretzel/plots/pretzel_succ_1.png",
+          "i": 1,
+          "y": 0,
+          "dt": null
+        },
+        {
+          "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/pretzel/traces/pretzel_succ_2.npz",
+          "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/pretzel/plots/pretzel_succ_2.png",
+          "i": 2,
+          "y": 0,
+          "dt": null
+        },
+        {
+          "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/pretzel/traces/pretzel_succ_3.npz",
+          "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/pretzel/plots/pretzel_succ_3.png",
+          "i": 3,
+          "y": 0,
+          "dt": 10
+        },
+        {
+          "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/pretzel/traces/pretzel_succ_6.npz",
+          "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/pretzel/plots/pretzel_succ_6.png",
+          "i": 6,
+          "y": 0,
+          "dt": null
+        },
+        {
+          "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/pretzel/traces/pretzel_succ_12.npz",
+          "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/pretzel/plots/pretzel_succ_12.png",
+          "i": 12,
+          "y": 0,
+          "dt": null
+        },
+        {
+          "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/pretzel/traces/pretzel_fail_0.npz",
+          "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/pretzel/plots/pretzel_fail_0.png",
+          "i": 0,
+          "y": 1,
+          "dt": 12
+        },
+        {
+          "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/pretzel/traces/pretzel_fail_4.npz",
+          "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/pretzel/plots/pretzel_fail_4.png",
+          "i": 4,
+          "y": 1,
+          "dt": 12
+        },
+        {
+          "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/pretzel/traces/pretzel_fail_5.npz",
+          "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/pretzel/plots/pretzel_fail_5.png",
+          "i": 5,
+          "y": 1,
+          "dt": 23
+        },
+        {
+          "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/pretzel/traces/pretzel_fail_7.npz",
+          "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/pretzel/plots/pretzel_fail_7.png",
+          "i": 7,
+          "y": 1,
+          "dt": 10
+        },
+        {
+          "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/pretzel/traces/pretzel_fail_8.npz",
+          "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/pretzel/plots/pretzel_fail_8.png",
+          "i": 8,
+          "y": 1,
+          "dt": 7
+        }
+      ]
+    },
+    "push_t": {
+      "task": "push_t",
+      "thr_task": 579.4316535856155,
+      "alpha": 0.1,
+      "bins_used": 10,
+      "bins_note": "auto(min=4,max=10,min_pts_per_bin=20)",
+      "calib_success_source": "calib_only",
+      "calib_scores_stats": {
+        "mean": 337.1868851277908,
+        "std": 209.0257670925159,
+        "min": 168.06683813145966,
+        "max": 1054.5580073765555,
+        "n": 21
+      },
+      "bin_counts_success_pool": [
+        44,
+        31,
+        31,
+        36,
+        28,
+        35,
+        38,
+        29,
+        33,
+        45
+      ],
+      "bin_counts_est_calib_only": [
+        44,
+        31,
+        31,
+        36,
+        28,
+        35,
+        38,
+        29,
+        33,
+        45
+      ],
+      "plotted": [
+        {
+          "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/push_t/traces/push_t_succ_198.npz",
+          "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/push_t/plots/push_t_succ_198.png",
+          "i": 198,
+          "y": 0,
+          "dt": 3
+        },
+        {
+          "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/push_t/traces/push_t_succ_199.npz",
+          "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/push_t/plots/push_t_succ_199.png",
+          "i": 199,
+          "y": 0,
+          "dt": null
+        },
+        {
+          "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/push_t/traces/push_t_succ_200.npz",
+          "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/push_t/plots/push_t_succ_200.png",
+          "i": 200,
+          "y": 0,
+          "dt": null
+        },
+        {
+          "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/push_t/traces/push_t_succ_201.npz",
+          "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/push_t/plots/push_t_succ_201.png",
+          "i": 201,
+          "y": 0,
+          "dt": null
+        },
+        {
+          "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/push_t/traces/push_t_succ_202.npz",
+          "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/push_t/plots/push_t_succ_202.png",
+          "i": 202,
+          "y": 0,
+          "dt": null
+        },
+        {
+          "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/push_t/traces/push_t_fail_0.npz",
+          "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/push_t/plots/push_t_fail_0.png",
+          "i": 0,
+          "y": 1,
+          "dt": 3
+        },
+        {
+          "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/push_t/traces/push_t_fail_1.npz",
+          "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/push_t/plots/push_t_fail_1.png",
+          "i": 1,
+          "y": 1,
+          "dt": 3
+        },
+        {
+          "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/push_t/traces/push_t_fail_2.npz",
+          "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/push_t/plots/push_t_fail_2.png",
+          "i": 2,
+          "y": 1,
+          "dt": 3
+        },
+        {
+          "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/push_t/traces/push_t_fail_3.npz",
+          "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/push_t/plots/push_t_fail_3.png",
+          "i": 3,
+          "y": 1,
+          "dt": 3
+        },
+        {
+          "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/push_t/traces/push_t_fail_4.npz",
+          "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/push_t/plots/push_t_fail_4.png",
+          "i": 4,
+          "y": 1,
+          "dt": 3
+        }
+      ]
+    },
+    "sorting": {
+      "task": "sorting",
+      "thr_task": 444.4739904081316,
+      "alpha": 0.1,
+      "bins_used": 10,
+      "bins_note": "auto(min=4,max=10,min_pts_per_bin=20)",
+      "calib_success_source": "calib_only",
+      "calib_scores_stats": {
+        "mean": 370.7582092587516,
+        "std": 73.7360595285548,
+        "min": 271.27462421332035,
+        "max": 709.8315443847735,
+        "n": 50
+      },
+      "bin_counts_success_pool": [
+        228,
+        199,
+        203,
+        202,
+        192,
+        214,
+        206,
+        199,
+        203,
+        230
+      ],
+      "bin_counts_est_calib_only": [
+        228,
+        199,
+        203,
+        202,
+        192,
+        214,
+        206,
+        199,
+        203,
+        230
+      ],
+      "plotted": [
+        {
+          "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/sorting/traces/sorting_succ_145.npz",
+          "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/sorting/plots/sorting_succ_145.png",
+          "i": 145,
+          "y": 0,
+          "dt": null
+        },
+        {
+          "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/sorting/traces/sorting_succ_146.npz",
+          "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/sorting/plots/sorting_succ_146.png",
+          "i": 146,
+          "y": 0,
+          "dt": null
+        },
+        {
+          "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/sorting/traces/sorting_succ_147.npz",
+          "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/sorting/plots/sorting_succ_147.png",
+          "i": 147,
+          "y": 0,
+          "dt": null
+        },
+        {
+          "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/sorting/traces/sorting_succ_148.npz",
+          "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/sorting/plots/sorting_succ_148.png",
+          "i": 148,
+          "y": 0,
+          "dt": null
+        },
+        {
+          "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/sorting/traces/sorting_succ_149.npz",
+          "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/sorting/plots/sorting_succ_149.png",
+          "i": 149,
+          "y": 0,
+          "dt": null
+        },
+        {
+          "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/sorting/traces/sorting_fail_0.npz",
+          "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/sorting/plots/sorting_fail_0.png",
+          "i": 0,
+          "y": 1,
+          "dt": null
+        },
+        {
+          "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/sorting/traces/sorting_fail_1.npz",
+          "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/sorting/plots/sorting_fail_1.png",
+          "i": 1,
+          "y": 1,
+          "dt": 6
+        },
+        {
+          "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/sorting/traces/sorting_fail_2.npz",
+          "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/sorting/plots/sorting_fail_2.png",
+          "i": 2,
+          "y": 1,
+          "dt": null
+        },
+        {
+          "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/sorting/traces/sorting_fail_3.npz",
+          "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/sorting/plots/sorting_fail_3.png",
+          "i": 3,
+          "y": 1,
+          "dt": 6
+        },
+        {
+          "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/sorting/traces/sorting_fail_4.npz",
+          "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/sorting/plots/sorting_fail_4.png",
+          "i": 4,
+          "y": 1,
+          "dt": null
+        }
+      ]
+    },
+    "stacking": {
+      "task": "stacking",
+      "thr_task": 635.0074179077693,
+      "alpha": 0.1,
+      "bins_used": 10,
+      "bins_note": "auto(min=4,max=10,min_pts_per_bin=20)",
+      "calib_success_source": "calib_only",
+      "calib_scores_stats": {
+        "mean": 401.5925355080078,
+        "std": 143.54390039339702,
+        "min": 275.2062178730727,
+        "max": 962.5857963837954,
+        "n": 50
+      },
+      "bin_counts_success_pool": [
+        291,
+        270,
+        275,
+        269,
+        264,
+        279,
+        273,
+        271,
+        274,
+        294
+      ],
+      "bin_counts_est_calib_only": [
+        291,
+        270,
+        275,
+        269,
+        264,
+        279,
+        273,
+        271,
+        274,
+        294
+      ],
+      "plotted": [
+        {
+          "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/stacking/traces/stacking_succ_485.npz",
+          "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/stacking/plots/stacking_succ_485.png",
+          "i": 485,
+          "y": 0,
+          "dt": null
+        },
+        {
+          "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/stacking/traces/stacking_succ_486.npz",
+          "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/stacking/plots/stacking_succ_486.png",
+          "i": 486,
+          "y": 0,
+          "dt": null
+        },
+        {
+          "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/stacking/traces/stacking_succ_487.npz",
+          "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/stacking/plots/stacking_succ_487.png",
+          "i": 487,
+          "y": 0,
+          "dt": null
+        },
+        {
+          "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/stacking/traces/stacking_succ_488.npz",
+          "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/stacking/plots/stacking_succ_488.png",
+          "i": 488,
+          "y": 0,
+          "dt": null
+        },
+        {
+          "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/stacking/traces/stacking_succ_489.npz",
+          "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/stacking/plots/stacking_succ_489.png",
+          "i": 489,
+          "y": 0,
+          "dt": null
+        },
+        {
+          "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/stacking/traces/stacking_fail_0.npz",
+          "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/stacking/plots/stacking_fail_0.png",
+          "i": 0,
+          "y": 1,
+          "dt": null
+        },
+        {
+          "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/stacking/traces/stacking_fail_1.npz",
+          "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/stacking/plots/stacking_fail_1.png",
+          "i": 1,
+          "y": 1,
+          "dt": 9
+        },
+        {
+          "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/stacking/traces/stacking_fail_2.npz",
+          "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/stacking/plots/stacking_fail_2.png",
+          "i": 2,
+          "y": 1,
+          "dt": null
+        },
+        {
+          "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/stacking/traces/stacking_fail_3.npz",
+          "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/stacking/plots/stacking_fail_3.png",
+          "i": 3,
+          "y": 1,
+          "dt": 9
+        },
+        {
+          "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/stacking/traces/stacking_fail_4.npz",
+          "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/stacking/plots/stacking_fail_4.png",
+          "i": 4,
+          "y": 1,
+          "dt": 8
+        }
+      ]
+    },
+    "push_chair": {
+      "task": "push_chair",
+      "thr_task": 406.87386039025796,
+      "alpha": 0.1,
+      "bins_used": 4,
+      "bins_note": "auto(min=4,max=10,min_pts_per_bin=20)",
+      "calib_success_source": "calib_only",
+      "calib_scores_stats": {
+        "mean": 239.33110713930506,
+        "std": 88.57242047738092,
+        "min": 143.02423759026286,
+        "max": 406.87386039025796,
+        "n": 10
+      },
+      "bin_counts_success_pool": [
+        14,
+        8,
+        11,
+        16
+      ],
+      "bin_counts_est_calib_only": [
+        14,
+        8,
+        11,
+        16
+      ],
+      "plotted": [
+        {
+          "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/push_chair/traces/push_chair_succ_10.npz",
+          "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/push_chair/plots/push_chair_succ_10.png",
+          "i": 10,
+          "y": 0,
+          "dt": null
+        },
+        {
+          "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/push_chair/traces/push_chair_succ_11.npz",
+          "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/push_chair/plots/push_chair_succ_11.png",
+          "i": 11,
+          "y": 0,
+          "dt": null
+        },
+        {
+          "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/push_chair/traces/push_chair_succ_12.npz",
+          "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/push_chair/plots/push_chair_succ_12.png",
+          "i": 12,
+          "y": 0,
+          "dt": 2
+        },
+        {
+          "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/push_chair/traces/push_chair_succ_13.npz",
+          "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/push_chair/plots/push_chair_succ_13.png",
+          "i": 13,
+          "y": 0,
+          "dt": null
+        },
+        {
+          "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/push_chair/traces/push_chair_succ_14.npz",
+          "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/push_chair/plots/push_chair_succ_14.png",
+          "i": 14,
+          "y": 0,
+          "dt": null
+        },
+        {
+          "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/push_chair/traces/push_chair_fail_0.npz",
+          "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/push_chair/plots/push_chair_fail_0.png",
+          "i": 0,
+          "y": 1,
+          "dt": 1
+        },
+        {
+          "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/push_chair/traces/push_chair_fail_1.npz",
+          "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/push_chair/plots/push_chair_fail_1.png",
+          "i": 1,
+          "y": 1,
+          "dt": 1
+        },
+        {
+          "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/push_chair/traces/push_chair_fail_2.npz",
+          "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/push_chair/plots/push_chair_fail_2.png",
+          "i": 2,
+          "y": 1,
+          "dt": 1
+        },
+        {
+          "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/push_chair/traces/push_chair_fail_3.npz",
+          "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/push_chair/plots/push_chair_fail_3.png",
+          "i": 3,
+          "y": 1,
+          "dt": 1
+        },
+        {
+          "npz": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/push_chair/traces/push_chair_fail_4.npz",
+          "png": "/home/s447658/projects/dreamer_fiper_results/exp2_traces/push_chair/plots/push_chair_fail_4.png",
+          "i": 4,
+          "y": 1,
+          "dt": 1
+        }
+      ]
+    }
+  }
+}
